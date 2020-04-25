@@ -24,8 +24,7 @@ config_php_errors();
 // an error the initialization SQL.
 // Returns: Connection to database.
 // Example: $db = open_or_init_sqlite_db('secure/gallery.sqlite', 'secure/init.sql');
-function open_or_init_sqlite_db($db_filename, $init_sql_filename)
-{
+function open_or_init_sqlite_db($db_filename, $init_sql_filename){
   // If the init SQL script does not exist, quit!
   if (!file_exists($init_sql_filename)) {
     throw new Exception("No such file: " . $init_sql_filename);
@@ -89,12 +88,13 @@ function open_or_init_sqlite_db($db_filename, $init_sql_filename)
 // Execute a query ($sql) against a datbase ($db).
 // Returns query results if query was successful.
 // Returns null if query was not successful.
-function exec_sql_query($db, $sql, $params = array())
-{
+function exec_sql_query($db, $sql, $params = array()){
   $query = $db->prepare($sql);
   if ($query and $query->execute($params)) {
     return $query;
   }
   return null;
 }
+
+$db = open_or_init_sqlite_db('secure/gallery.sqlite', 'secure/init.sql');
 ?>

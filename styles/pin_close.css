@@ -1,0 +1,151 @@
+body {
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: Montserrat;
+  background-color: #f4f7f6;
+}
+
+.back {
+  position: absolute;
+  top: 3vw;
+  left: 4.7vw;
+}
+
+.back a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+}
+
+.back a svg {
+  width: 40px;
+  height: 40px;
+  stroke: #2e2e2e;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.back a span {
+  font-size: 30px;
+  font-weight: 200;
+  text-transform: uppercase;
+  color: #2e2e2e;
+}
+
+main {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+      grid-template-columns: auto 1fr;
+  padding: 5vw;
+}
+
+.image {
+  height: 36.6vw;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.prevw {
+  padding: 3vw;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 4vw auto 3vw 3vw 1fr;
+      grid-template-rows: 4vw auto 3vw 3vw 1fr;
+  justify-items: flex-start;
+  background-color: #fcfcfc;
+  color: #2e2e2e;
+}
+
+.prevw__name {
+  font-size: 2.7vw;
+}
+
+.prevw__options {
+  position: absolute;
+  top: 1.5vw;
+  right: 1vw;
+}
+
+.prevw__options svg {
+  width: 2vw;
+}
+
+.prevw__tags {
+  font-size: 1vw;
+  margin-bottom: 2vw;
+}
+
+.prevw__tags a {
+  background-color: var(--tag_color);
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+}
+
+.prevw__linkbox {
+  font-size: 1vw;
+  height: 1.4em;
+  border: 1px solid #2e2e2e;
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+  overflow: hidden;
+}
+
+.prevw__linkbox a {
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 1.4em;
+}
+
+.prevw__linkbox a div {
+  line-height: 1.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.prevw__linkbox a svg {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 1.8vw;
+  height: 1.8vw;
+  stroke: #2e2e2e;
+  stroke-width: 1.3;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.prevw__date {
+  font-size: 1vw;
+}
+
+.prevw__description {
+  font-size: 1vw;
+}
+/*# sourceMappingURL=pin_close.css.map */

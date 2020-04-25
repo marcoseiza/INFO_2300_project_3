@@ -1,0 +1,601 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f4f7f6;
+  font-family: Montserrat;
+}
+
+a {
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+main {
+  margin: 5vw 5vw;
+}
+
+main .pins_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(350px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  gap: 20px;
+}
+
+main .pins_container > input {
+  display: none;
+}
+
+main .pins_container > input:checked + .pins_container__add {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 1 / 1 / 3 / 2;
+}
+
+main .pins_container > input:checked + .pins_container__add:after {
+  padding-top: 150%;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content {
+  background-color: #fcfcfc;
+  -webkit-transition: background-color 200ms ease-in-out 200ms;
+  transition: background-color 200ms ease-in-out 200ms;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content > label {
+  position: absolute;
+  z-index: 9;
+  background-color: #fcfcfc;
+  -webkit-transform: scale(0.5) translate(-50%, -50%);
+          transform: scale(0.5) translate(-50%, -50%);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  -webkit-animation: pin_add_position 400ms ease-in-out forwards;
+          animation: pin_add_position 400ms ease-in-out forwards;
+  -webkit-transition: background-color 400ms ease-in-out, -webkit-transform 200ms ease-in-out 200ms;
+  transition: background-color 400ms ease-in-out, -webkit-transform 200ms ease-in-out 200ms;
+  transition: transform 200ms ease-in-out 200ms, background-color 400ms ease-in-out;
+  transition: transform 200ms ease-in-out 200ms, background-color 400ms ease-in-out, -webkit-transform 200ms ease-in-out 200ms;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content > label svg {
+  stroke: #a0a0a0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
+}
+
+@-webkit-keyframes pin_add_position {
+  0% {
+    top: 20%;
+    left: 50%;
+  }
+  50% {
+    top: 30px;
+    left: 50%;
+  }
+  100% {
+    top: 30px;
+    left: 30px;
+  }
+}
+
+@keyframes pin_add_position {
+  0% {
+    top: 20%;
+    left: 50%;
+  }
+  50% {
+    top: 30px;
+    left: 50%;
+  }
+  100% {
+    top: 30px;
+    left: 30px;
+  }
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 200ms ease-in-out 400ms, visibility 200ms ease-in-out 400ms;
+  transition: opacity 200ms ease-in-out 400ms, visibility 200ms ease-in-out 400ms;
+  width: 100%;
+  height: 100%;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin {
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+  -ms-grid-rows: 4fr 7fr;
+      grid-template-rows: 4fr 7fr;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img {
+  border-bottom: 2px dashed #a0a0a0;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img input {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img label {
+  width: 100%;
+  height: 100%;
+  background-color: #fcfcfc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  color: #a0a0a0;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img label span.file_uploaded {
+  font-size: 1.2em;
+  -webkit-animation: file_uploaded 500ms ease-in forwards;
+          animation: file_uploaded 500ms ease-in forwards;
+  color: #2e2e2e;
+  -webkit-transition: color 200ms ease-in-out;
+  transition: color 200ms ease-in-out;
+}
+
+@-webkit-keyframes file_uploaded {
+  0% {
+    font-size: 1em;
+  }
+  50% {
+    font-size: 1.5em;
+  }
+  100% {
+    font-size: 1.2em;
+  }
+}
+
+@keyframes file_uploaded {
+  0% {
+    font-size: 1em;
+  }
+  50% {
+    font-size: 1.5em;
+  }
+  100% {
+    font-size: 1.2em;
+  }
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img label svg {
+  width: 80px;
+  stroke: #a0a0a0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img label svg.run_svg_animation g.upload-arrow path {
+  stroke-dasharray: 22.75;
+  stroke-dashoffset: 22.75;
+  -webkit-animation: draw-svg 300ms ease-in forwards;
+          animation: draw-svg 300ms ease-in forwards;
+}
+
+@-webkit-keyframes draw-svg {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-svg {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img label:hover svg g.upload-bottom path {
+  stroke: #009292;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img label:hover svg g.upload-arrow path {
+  stroke: #009292;
+  stroke-dasharray: 22.75;
+  stroke-dashoffset: 22.75;
+  -webkit-animation: draw-svg 300ms ease-in forwards;
+          animation: draw-svg 300ms ease-in forwards;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw {
+  padding: 4%;
+  position: relative;
+  overflow: scroll;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  row-gap: 10px;
+  color: #2e2e2e;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw input {
+  font-family: Montserrat;
+  font-weight: 300;
+  background-color: transparent;
+  color: #2e2e2e;
+  padding: 0;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw__name {
+  font-size: 1.4em;
+  border: none;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw #add_form_pin_tag_container {
+  position: relative;
+  width: 92%;
+  margin: 3px 0 4px 0;
+  font-size: 0.8em;
+  font-weight: 300;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw #add_form_pin_tag_container #add_form_pin_tag_list {
+  white-space: pre-line;
+  line-height: 2em;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw #add_form_pin_tag_container #add_form_pin_tag_list span {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  margin-right: 0.3em;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw #add_form_pin_tag_container #hidden_add_form_pin_tags {
+  display: none;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw__tags {
+  font-size: 1em;
+  border: none;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw__link {
+  border: 1px solid #2e2e2e;
+  width: 50%;
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw__link input {
+  border: none;
+  width: 90%;
+  font-size: 1em;
+  font-family: Montserrat;
+  font-weight: 300;
+  background-color: #fcfcfc;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw__link svg {
+  width: 23px;
+  height: 23px;
+  stroke: #2e2e2e;
+  stroke-width: 1.3;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw textarea {
+  resize: vertical;
+  width: 97%;
+  height: 61.5%;
+  border: 1px solid #2e2e2e;
+  border-radius: 0.3em;
+  padding: 0.3em;
+  background-color: transparent;
+  font-family: Montserrat;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw button {
+  font-family: Montserrat;
+  font-size: 1em;
+  background-color: rgba(238, 94, 94, 0.5);
+  border: none;
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw button:hover {
+  background-color: rgba(238, 94, 94, 0.8);
+  cursor: pointer;
+}
+
+main .pins_container__add {
+  position: relative;
+}
+
+main .pins_container__add::after {
+  content: "";
+  display: block;
+  padding-top: 85%;
+}
+
+main .pins_container__add__content {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+main .pins_container__add__content > label {
+  background-color: rgba(238, 94, 94, 0.596);
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+main .pins_container__add__content > label:hover {
+  background-color: rgba(238, 94, 94, 0.849);
+}
+
+main .pins_container__add__content > label svg {
+  width: 60px;
+  stroke: #f4f7f6;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+main .pins_container__add__content__form {
+  visibility: hidden;
+  opacity: 0;
+}
+
+main .pins_container .pin {
+  list-style: none;
+  background-color: #fcfcfc;
+  position: relative;
+}
+
+main .pins_container .pin__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 0 8fr 3fr;
+      grid-template-rows: 0 8fr 3fr;
+}
+
+main .pins_container .pin__content__bookmark {
+  position: relative;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  width: 50px;
+  height: 50px;
+}
+
+main .pins_container .pin__content__bookmark svg {
+  width: 50px;
+  height: auto;
+  stroke: #2e2e2e;
+  fill: #a0a0a0;
+  opacity: 0.7;
+}
+
+main .pins_container .pin__content__img {
+  background-color: grey;
+  overflow: hidden;
+}
+
+main .pins_container .pin__content__img img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+}
+
+main .pins_container .pin__content__img img:hover {
+  opacity: 0.9;
+  scale: 1.05;
+}
+
+main .pins_container .pin__content__prevw {
+  padding: 4%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  -ms-grid-rows: auto auto auto;
+      grid-template-rows: auto auto auto;
+  font-weight: 300;
+  row-gap: 10px;
+  background-color: #fcfcfc;
+}
+
+main .pins_container .pin__content__prevw__name {
+  -ms-grid-column-align: start;
+      justify-self: start;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-size: 1.4em;
+  color: #2e2e2e;
+}
+
+main .pins_container .pin__content__prevw__tags {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-area: 2 / 1 / 3 / -1;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+  margin-bottom: 3px;
+}
+
+main .pins_container .pin__content__prevw__tags a {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  font-size: 0.8em;
+  --tag_color: grey;
+  text-decoration: none;
+  background-color: var(--tag_color);
+}
+
+main .pins_container .pin__content__prevw__linkbox {
+  -ms-grid-column-align: start;
+      justify-self: start;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+  width: 50%;
+  height: 1.4em;
+  border: 1px solid #2e2e2e;
+  border-radius: 0.3em;
+  padding: 0.1em 0.3em;
+  overflow: hidden;
+}
+
+main .pins_container .pin__content__prevw__linkbox a {
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 1.4em;
+}
+
+main .pins_container .pin__content__prevw__linkbox a div {
+  width: 80%;
+  line-height: 1.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+main .pins_container .pin__content__prevw__linkbox a svg {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  width: 23px;
+  height: 23px;
+  stroke: #2e2e2e;
+  stroke-width: 1.3;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+main .pins_container .pin__content__prevw__options {
+  justify-self: end;
+  -ms-flex-item-align: center;
+      align-self: center;
+  width: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .pins_container .pin__content__prevw__options svg {
+  stroke: #a0a0a0;
+  fill: #a0a0a0;
+}
+
+main .pins_container .pin__content__prevw__date {
+  -ms-grid-column-align: end;
+      justify-self: end;
+  -ms-flex-item-align: end;
+      -ms-grid-row-align: end;
+      align-self: end;
+}
+
+main .pins_container .pin::after {
+  content: "";
+  display: block;
+  padding-top: 85%;
+}
+/*# sourceMappingURL=pins.css.map */
