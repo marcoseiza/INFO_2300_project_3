@@ -90,9 +90,11 @@ include("includes/pin_add.php");
         </div>
       </div>
       <?php
-      if (!isset($_GET["board_id"])) {
-        echo "<a href='pins.php?board_id=1'>CLICK HERE TO GO TO BOARD 1</a>";
+
+      if ($board_id === NULL) {
+        echo "<a href='pins.php?board_id=1'>NEED TO CLICK HERE TO GO TO BOARD 1 THIS IS NOT A BOARD WHERE YOU CAN ADD PINS</a>";
       }
+
       // tags.name, pins.id, pins.name, pins.link, pins.description, images.src, images.description
       function pin($board_id, $id, $name, $link, $date, $image_src, $image_desc, $tags) { ?>
         <li class="pin pin_<?php echo $id?>">

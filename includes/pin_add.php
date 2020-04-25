@@ -16,10 +16,10 @@ function uploadImage($image) {
     $message = "File already exists";
   }
 
-  if ($_FILES[$image]['size'] > 500000) {
-    $uploadable = FALSE;
-    $message = "File is too large";
-  }
+  // if ($_FILES[$image]['size'] > 500000) {
+  //   $uploadable = FALSE;
+  //   $message = "File is too large";
+  // }
 
   if ($uploadable) {
     if (move_uploaded_file($_FILES[$image]['tmp_name'], $file)) {
