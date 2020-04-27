@@ -18,8 +18,8 @@ body {
 
 .back {
   position: absolute;
-  top: 3vw;
-  left: 4.7vw;
+  top: 40px;
+  left: 5vw;
 }
 
 .back a {
@@ -35,16 +35,27 @@ body {
 .back a svg {
   width: 40px;
   height: 40px;
+  margin-right: 10px;
   stroke: #2e2e2e;
+  stroke-linecap: round;
+  stroke-width: 1.2;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
 
 .back a span {
   font-size: 30px;
-  font-weight: 200;
+  font-weight: 300;
   text-transform: uppercase;
   color: #2e2e2e;
+}
+
+.back a:hover span, .back a:focus span {
+  font-weight: 400;
+}
+
+.back a:hover svg, .back a:focus svg {
+  stroke-width: 1.8;
 }
 
 main {
@@ -71,8 +82,9 @@ main {
   position: relative;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 4vw auto 3vw 3vw 1fr;
-      grid-template-rows: 4vw auto 3vw 3vw 1fr;
+  -ms-grid-rows: auto auto auto auto 1fr;
+      grid-template-rows: auto auto auto auto 1fr;
+  gap: 1vw;
   justify-items: flex-start;
   background-color: #fcfcfc;
   color: #2e2e2e;
@@ -80,6 +92,16 @@ main {
 
 .prevw__name {
   font-size: 2.7vw;
+  font-weight: 300;
+}
+
+.prevw > input {
+  display: none;
+}
+
+.prevw > input:checked ~ .options_menu {
+  display: -ms-grid;
+  display: grid;
 }
 
 .prevw__options {
@@ -89,18 +111,174 @@ main {
 }
 
 .prevw__options svg {
-  width: 2vw;
+  width: 1.6vw;
+  fill: #a0a0a0;
+}
+
+.prevw__options:hover, .prevw__options:focus {
+  cursor: pointer;
+}
+
+.prevw__options:hover svg, .prevw__options:focus svg {
+  fill: #2e2e2e;
+}
+
+.prevw .options_menu {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  top: 1.5vw;
+  right: 1.5vw;
+  background-color: #fcfcfc;
+  -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+}
+
+.prevw .options_menu a {
+  padding: 10px 10px 7px 20px;
+  height: 30px;
+  margin-right: -1.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #2e2e2e;
+}
+
+.prevw .options_menu a:hover, .prevw .options_menu a:focus {
+  background-color: #e3e3e3;
+}
+
+.prevw .options_menu a:hover svg, .prevw .options_menu a:focus svg {
+  stroke: #2e2e2e;
+}
+
+.prevw .options_menu a svg {
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  width: 30px;
+  stroke: #a0a0a0;
+  stroke-width: 2;
+  fill: none;
+  margin-left: 9px;
+}
+
+.prevw .options_menu__trash {
+  padding: 5px 10px 10px 20px;
+  position: relative;
+  z-index: 9999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.prevw .options_menu__trash:hover, .prevw .options_menu__trash:focus {
+  background-color: #e3e3e3;
+}
+
+.prevw .options_menu__trash:hover svg, .prevw .options_menu__trash:focus svg {
+  stroke: #2e2e2e;
+}
+
+.prevw .options_menu__trash .delete_title {
+  margin-top: 5.5px;
+  margin-right: 7px;
+  white-space: nowrap;
+  text-transform: capitalize;
+  color: #2e2e2e;
+}
+
+.prevw .options_menu__trash svg {
+  margin-right: -5.5px;
+  width: 35px;
+  stroke: #a0a0a0;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+.prevw .options_menu__trash svg g.lid {
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.prevw .options_menu__trash:hover, .prevw .options_menu__trash:focus {
+  cursor: pointer;
+}
+
+.prevw .options_menu__trash .trash-confirmation {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  gap: 10px;
+  place-items: center;
+  place-content: center;
+  margin-top: 5.5px;
+  padding-left: 25px;
+  width: 57px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.prevw .options_menu__trash .trash-confirmation .trash-checkmark {
+  font-size: 18px;
+  color: #129712;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+
+.prevw .options_menu__trash .trash-confirmation .trash-checkmark input {
+  display: none;
+}
+
+.prevw .options_menu__trash .trash-confirmation .trash-cross {
+  font-size: 18px;
+  color: #da0303;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
 }
 
 .prevw__tags {
   font-size: 1vw;
-  margin-bottom: 2vw;
+  margin-bottom: 0.5vw;
 }
 
 .prevw__tags a {
-  background-color: var(--tag_color);
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
+  --tag_color: grey;
+  text-decoration: none;
+  background-color: var(--tag_color);
+  color: black;
+  opacity: 0.7;
+}
+
+.prevw__tags a:hover, .prevw__tags a:focus {
+  opacity: 1;
 }
 
 .prevw__linkbox {
@@ -142,10 +320,14 @@ main {
 }
 
 .prevw__date {
-  font-size: 1vw;
+  font-size: 1.2vw;
 }
 
 .prevw__description {
   font-size: 1vw;
+  width: 100%;
+  padding: 2vw 3vw;
+  margin: 2vw -3vw;
+  border-top: 1px solid #a0a0a0;
 }
 /*# sourceMappingURL=pin_close.css.map */

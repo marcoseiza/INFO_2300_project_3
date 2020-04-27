@@ -1,10 +1,12 @@
 <?php
   include("includes/init.php");
+  include('includes/pin_update.php');
   $get_pin = "SELECT pins.id, pins.name, pins.link, pins.date, pins.description, images.src, images.description FROM  pins INNER JOIN images ON pins.image_id = images.id WHERE pins.id = :id";
-  $get_tags = "SELECT tags.name FROM tags WHERE tags.pin_id = :id";
+  $get_tags = "SELECT tags.name, tags.color FROM tags WHERE tags.pin_id = :id";
 
   $pin = exec_sql_query($db, $get_pin, array(":id" => $_GET["id"]))->fetchAll();
   $tags = exec_sql_query($db, $get_tags, array(":id" => $_GET["id"]))->fetchAll();
+  $board_id = $_GET['board_id'];
   $pin = $pin[0];
 ?>
 
@@ -21,8 +23,7 @@
   <div class="back">
     <a href="pins.php?board_id=<?php echo $_GET["board_id"]?>">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
-        <line x1="5" y1="15" x2="25" y2="15"/>
-        <path d="M25 15 l-10 -10 M25 15 l-10 10"/>
+        <path d="M5 15 l20 0 M25 15 l-10 -10 M25 15 l-10 10"/>
       </svg>
       <span>Back</span>
     </a>
@@ -34,18 +35,73 @@
       </a>
     </div>
     <div class="prevw">
-      <span class="prevw__name"><?php echo $pin["name"]?></span>
-      <div class="prevw__options">
+      <span class="prevw__name"><?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($pin["name"])))?></span>
+      <input type="checkbox" name="options" id="options">
+      <div for="options" class="prevw__options">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
           <circle cx="15" cy="5" r="3"/>
           <circle cx="15" cy="15" r="3"/>
           <circle cx="15" cy="25" r="3"/>
         </svg>
       </div>
+      <div class="options_menu">
+        <a href="pin_close_edit.php?<?php echo http_build_query(array("id"=>$_GET["id"], "board_id"=>$board_id))?>">
+          edit
+          <svg viewBox="0 0 30 12">
+            <path d="M2 2 l20 0 6 4 -6 4 -20 0 0 -9 M6.5 2 l0 8"/>
+          </svg>
+        </a>
+        <form method="post" action="pins.php" class="options_menu__trash">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+            <g class="lid">
+              <path  d="
+                M 5 8
+                h 20
+
+                M 10 8
+                v -3
+                h 10
+                v 3
+                "/>
+            </g>
+            <g class="can">
+              <path d="
+                M 15 11
+                h 8.5
+                v 9
+                c -0 7 -0.5 7.5 -8.5 7.5
+                s -8.5 -0.5 -8.5 -7.5
+                v -9
+                z
+
+                M 15 14.5
+                v 9
+
+                M 11 14.5
+                v 9
+
+                M 19 14.5
+                v 9
+                "/>
+            </g>
+          </svg>
+          <div class="delete_title">delete</div>
+          <div class="trash-confirmation">
+            <label class="trash-checkmark" for="trash-checkmark-button">
+              <input type="submit" name="trash-confirmation" id="trash-checkmark-button" value="<?php echo $_GET["id"] .','. $board_id?>">
+              &#x2713;
+            </label>
+            <label class="trash-cross">
+              &#10006;
+            </label>
+          </div>
+        </form>
+        <script src="scripts/trash_close.js"></script>
+      </div>
       <div class="prevw__tags">
         <?php
         foreach($tags as $tag) {?>
-          <a style="--tag_color: lightgrey"><?php echo $tag["name"]?></a>
+          <a href="pins.php?<?php echo http_build_query(array("tag_name"=>$tag["name"], "board_id"=>$board_id))?>" style="--tag_color: <?php echo $tag["color"]?>"><?php echo htmlspecialchars($tag["name"])?></a>
         <?php }
         ?>
       </div>
@@ -62,7 +118,7 @@
       </div>
       <div class="prevw__date"><?php echo $pin["date"]?></div>
       <div class="prevw__description">
-        <?php echo $pin[4]?>
+        <?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($pin[4])))?>
       </div>
     </div>
   </main>

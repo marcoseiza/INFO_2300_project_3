@@ -1,12 +1,11 @@
-let input = document.getElementById('add_form_pin_tags'),
-    hidden_input = document.getElementById('hidden_add_form_pin_tags'),
-    list = document.getElementById('add_form_pin_tag_list'),
+let input = document.getElementById('update_form_pin_tags'),
+    hidden_input = document.getElementById('hidden_update_form_pin_tags'),
+    list = document.getElementById('update_form_pin_tag_list'),
     tag = "",
     tag_writing = false,
-    tag_numb = 0,
+    tag_numb = hidden_input.value.split('#').length - 1,
     first_warning = false
 
-// console.log(input);
 
 function escapeHtml(dirty) {
   return dirty.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;")
@@ -25,6 +24,7 @@ function addTag(tag) {
   if (tag === "" || tag == " " || tag == "#") {
     return ""
   }
+
   // add tag
   const color = getColor()
   input.insertAdjacentHTML("beforebegin", " <span id='form_tag_numb_" + tag_numb + "' style='background-color:" + color + ";'>" + escapeHtml(tag) + "</span>")
@@ -46,7 +46,7 @@ function deletePreviousTag () {
     tag_numb -= 1
     first_warning = false
     if (tag_numb == 0) {
-      input.placeholder = "#tag1 #tag2 #tag3"
+      input.placeholder = "add or delete"
     }
   } else {
     latest_tag = document.getElementById('form_tag_numb_' + (tag_numb - 1))
@@ -77,7 +77,6 @@ input.onkeydown = function () {
 }
 
 input.oninput = function () {
-  // console.log(input.value)
   last = input.value.slice(-1)
 
   if (last == "#") {

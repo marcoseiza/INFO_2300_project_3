@@ -12,21 +12,33 @@ body {
 
 .back {
   position: absolute;
-  top: 3vw; left: 4.7vw;
+  top: 40px; left: 5vw;
   a {
     display: flex;
     align-items: center;
     text-decoration: none;
     svg {
       width: 40px; height: 40px;
+      margin-right: 10px;
       stroke: color(main_text);
+      stroke-linecap: round;
+      stroke-width: 1.2;
       transform: rotate(180deg);
     }
     span {
       font-size: 30px;
-      font-weight: 200;
+      font-weight: 300;
       text-transform: uppercase;
       color: color(main_text);
+    }
+
+    &:hover, &:focus {
+      span {
+        font-weight: 400;
+      }
+      svg {
+        stroke-width: 1.8;
+      }
     }
   }
 }
@@ -50,7 +62,8 @@ main {
   padding: 3vw;
   position: relative;
   display: grid;
-  grid-template-rows: 4vw auto 3vw 3vw 1fr;
+  grid-template-rows: auto auto auto auto 1fr;
+  gap: 1vw;
   justify-items: flex-start;
   background-color: color(cards);
   color: color(main_text);
@@ -58,23 +71,150 @@ main {
 
   &__name {
     font-size: 2.7vw;
+    font-weight: 300;
+  }
+
+  > input {
+    display: none;
+    &:checked ~ .options_menu{
+      display: grid;
+    }
   }
 
   &__options {
     position: absolute;
     top: 1.5vw; right: 1vw;
     svg {
-      width: 2vw;
+      width: 1.6vw;
+      fill: color(icons);
+    }
+    &:hover, &:focus {
+      cursor: pointer;
+      svg {
+        fill: color(main_text);
+      }
+    }
+  }
+
+  .options_menu {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    top: 1.5vw; right: 1.5vw;
+    background-color: color(cards);
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+    grid-template-rows: auto auto;
+
+    a {
+      padding: 10px 10px 7px 20px;
+      height: 30px;
+      margin-right: -1.5px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      text-decoration: none;
+      text-transform: capitalize;
+      color: color(main_text);
+      &:hover, &:focus {
+        background-color: darken(color(cards), 10);
+        svg {
+          stroke: color(main_text);
+        }
+      }
+      svg {
+        transform: rotate(135deg);
+        width: 30px;
+        stroke: color(icons);
+        stroke-width: 2;
+        fill: none;
+        margin-left: 9px;
+      }
+    }
+
+    &__trash {
+      padding: 5px 10px 10px 20px;
+      position: relative;
+      z-index: 9999;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      &:hover, &:focus {
+        background-color: darken(color(cards), 10);
+        svg {
+          stroke: color(main_text);
+        }
+      }
+
+      .delete_title {
+        margin-top: 5.5px;
+        margin-right: 7px;
+        white-space: nowrap;
+        text-transform: capitalize;
+        color: color(main_text);
+      }
+      svg {
+        margin-right: -5.5px;
+        width: 35px;
+        stroke: color(icons);
+        fill: none;
+        stroke-width: 1.8;
+        g.lid {
+          transform-origin: top right;
+        }
+      }
+      &:hover, &:focus {
+        cursor: pointer;
+      }
+
+      .trash-confirmation {
+        display: none;
+        position: absolute;
+        z-index: 999;
+        left: 0;
+        grid-template-columns: auto auto;
+        gap: 10px;
+        place-items: center;
+        place-content: center;
+        margin-top: 5.5px;
+        padding-left: 25px;
+        width: 57px;
+        height: 30px;
+        border-radius: 10px;
+
+        .trash-checkmark {
+            font-size: 18px;
+            color: rgb(18, 151, 18);
+            user-select: none;
+            cursor: pointer;
+            input {
+              display: none;
+            }
+        }
+        .trash-cross {
+            font-size: 18px;
+            color: rgb(218, 3, 3);
+            user-select: none;
+            cursor: pointer;
+        }
+      }
     }
   }
 
   &__tags {
     font-size: 1vw;
-    margin-bottom: 2vw;
+    margin-bottom: 0.5vw;
     a {
-      background-color: var(--tag_color);
       padding: 0.1em 0.3em;
       border-radius: 0.3em;
+      --tag_color: grey;
+      text-decoration: none;
+      background-color: var(--tag_color);
+      color: black;
+      opacity: 0.7;
+      &:hover, &:focus {
+        opacity: 1;
+      }
     }
   }
 
@@ -109,11 +249,15 @@ main {
   }
 
   &__date {
-    font-size: 1vw;
+    font-size: 1.2vw;
   }
 
   &__description {
     font-size: 1vw;
+    width: 100%;
+    padding: 2vw 3vw;
+    margin: 2vw -3vw;
+    border-top: 1px solid color(icons);
   }
 
 }

@@ -13,8 +13,76 @@ a {
   user-select: none;
 }
 
+.back {
+  padding: 40px 0 40px 5vw;
+  border-bottom: 1px solid color(icons);
+  display: flex;
+  justify-content: flex-start;
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    svg {
+      width: 40px; height: 40px;
+      margin-right: 10px;
+      stroke: color(main_text);
+      stroke-linecap: round;
+      stroke-width: 1.2;
+      transform: rotate(180deg);
+    }
+    span {
+      font-size: 30px;
+      font-weight: 300;
+      text-transform: uppercase;
+      color: color(main_text);
+    }
+
+    &:hover, &:focus {
+      span {
+        font-weight: 400;
+      }
+      svg {
+        stroke-width: 1.8;
+      }
+    }
+  }
+}
+
 main {
   margin: 5vw 5vw;
+
+  .tags {
+    display: flex;
+    justify-content: flex-start;
+    margin: -2.5vw 0 2.5vw 0;
+    span {
+      font-size: 1.5em;
+      font-weight: 300;
+      margin-right: 1em;
+    }
+    a {
+      text-decoration: none;
+      color: color(main_text);
+      font-size: 1.3em;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      padding: 0.1em 0.3em;
+      border-radius: 0.3em;
+      background-color: color(cards);
+      &:hover svg, &:focus svg {
+        stroke: rgba(238, 94, 94, 1)
+      }
+      svg {
+        margin-left: 0.3em;
+        width: 1em;
+        transform: rotate(45deg);
+        stroke: color(main_text);
+        stroke-width: 2;
+        stroke-linecap: round;
+      }
+    }
+  }
 
   .pins_container {
     display: grid;
@@ -77,21 +145,34 @@ main {
             grid-template-rows: 4fr 7fr;
 
             &__img {
-              border-bottom: 2px dashed color(icons);
               position: relative;
               display: flex;
               align-items: center; justify-content: center;
 
               input {
                 position: absolute;
-                z-index: -1;
                 top: 0; left: 0;
                 width: 100%; height: 100%;
+                &:focus + label {
+                  border-color: rgba(238, 94, 94, 1);
+
+                  svg g.upload-arrow path{
+                    stroke-dasharray: 22.75;
+                    stroke-dashoffset: 22.75;
+                    animation: draw-svg 300ms ease-in forwards;
+                  }
+                  svg g.upload-bottom path, svg g.upload-arrow path{
+                    stroke: rgb(0, 146, 146);
+                  }
+                }
               }
 
               label {
+                position: relative;
+                z-index: 1;
                 width: 100%; height: 100%;
                 background-color: color(cards);
+                border-bottom: 2px dashed color(icons);
                 display: flex;
                 flex-direction: column;
                 align-items: center; justify-content: center;
@@ -182,6 +263,7 @@ main {
                     padding: 0.1em 0.3em;
                     border-radius: 0.3em;
                     margin-right: 0.3em;
+                    opacity: 0.7;
                   }
                 }
 
@@ -196,20 +278,27 @@ main {
               }
 
               &__link {
-                border: 1px solid color(main_text);
+                position: relative;
                 width: 50%;
-                border-radius: 0.3em;
-                padding: 0.1em 0.3em;
                 display: flex;
                 align-items: center;
+                justify-content: flex-end;
+                padding: 0.1em 0.3em;
 
                 input {
-                  border: none;
-                  width: 90%;
+                  position: absolute;
+                  top: 0; left: 0;
+                  width: 83.8%;
+                  padding: 1% 14% 1% 2%;
                   font-size: 1em;
                   font-family: Montserrat;
                   font-weight: 300;
-                  background-color: color(cards);
+                  background-color: transparent;
+                  border: 1px solid color(main_text);
+                  border-radius: 0.3em;
+                  &:hover, &:focus {
+                    border-color: rgba(238, 94, 94, 1);
+                  }
                 }
                 svg {
                   width: 23px;
@@ -231,6 +320,9 @@ main {
                 font-family: Montserrat;
                 font-size: 1em;
                 font-weight: 300;
+                &:hover, &:focus {
+                  border-color: rgba(238, 94, 94, 1);
+                }
               }
 
               button {
@@ -243,7 +335,7 @@ main {
                 display: flex;
                 align-items: center;
                 color: white;
-                &:hover {
+                &:hover, &:focus {
                   background-color: rgba(238, 94, 94, 0.8);
                   cursor: pointer;
                 }
@@ -283,7 +375,7 @@ main {
           justify-content: center;
           cursor: pointer;
 
-          &:hover {
+          &:hover, &:focus {
             background-color: rgba(238, 94, 94, 0.849);
           }
 
@@ -312,20 +404,8 @@ main {
         top: 0; left: 0;
         height: 100%; width: 100%;
         display: grid;
-        grid-template-rows: 0 8fr 3fr;
+        grid-template-rows: 8fr 3fr;
 
-        &__bookmark {
-          position: relative;
-          justify-self: end;
-          width: 50px;
-          height: 50px;
-          svg {
-            width: 50px; height: auto;
-            stroke: color(main_text);
-            fill: color(icons);
-            opacity: 0.7;
-          }
-        }
 
         &__img {
           background-color: grey;
@@ -343,6 +423,7 @@ main {
 
         &__prevw {
           padding: 4%;
+          position: relative;
           display: grid;
           grid-template-columns: auto auto;
           grid-template-rows: auto auto auto;
@@ -369,10 +450,16 @@ main {
               --tag_color: grey;
               text-decoration: none;
               background-color: var(--tag_color);
+              color: black;
+              opacity: 0.7;
+              &:hover, &:focus {
+                opacity: 1;
+              }
             }
           }
 
           &__linkbox {
+            grid-area: 3 / 1 / 4 / 2;
             justify-self: start;
             align-self: end;
             width: 50%; height: 1.4em;
@@ -404,19 +491,135 @@ main {
             }
           }
 
+          > input {
+            display: none;
+            &:checked ~ .options_menu{
+              display: grid;
+            }
+          }
+
           &__options {
-            justify-self: end;
-            align-self: center;
-            width: 20px;
-            display: flex;
-            align-items: center;
+            position: absolute;
+            top: 20px; right: 15px;
             svg {
-              stroke: color(icons);
+              width: 20px;
               fill: color(icons);
+            }
+            &:hover, &:focus {
+              cursor: pointer;
+              svg {
+                fill: color(main_text);
+              }
+            }
+          }
+
+          .options_menu {
+            display: none;
+            position: absolute;
+            z-index: 999;
+            top: 15px; right: 15px;
+            background-color: color(cards);
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+            grid-template-rows: auto auto;
+
+            a {
+              padding: 10px 10px 7px 20px;
+              height: 30px;
+              margin-right: -1.5px;
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              text-decoration: none;
+              text-transform: capitalize;
+              color: color(main_text);
+              &:hover, &:focus {
+                background-color: darken(color(cards), 10);
+                svg {
+                  stroke: color(main_text);
+                }
+              }
+              svg {
+                transform: rotate(135deg);
+                width: 30px;
+                stroke: color(icons);
+                stroke-width: 2;
+                fill: none;
+                margin-left: 9px;
+              }
+            }
+
+            &__trash {
+              padding: 5px 10px 10px 20px;
+              position: relative;
+              z-index: 9999;
+              display: flex;
+              flex-direction: row-reverse;
+              align-items: center;
+
+              &:hover, &:focus {
+                background-color: darken(color(cards), 10);
+                svg {
+                  stroke: color(main_text);
+                }
+              }
+
+              .delete_title {
+                margin-top: 5.5px;
+                margin-right: 7px;
+                white-space: nowrap;
+                text-transform: capitalize;
+                color: color(main_text);
+              }
+              svg {
+                margin-right: -5.5px;
+                width: 35px;
+                stroke: color(icons);
+                fill: none;
+                stroke-width: 1.8;
+                g.lid {
+                  transform-origin: top right;
+                }
+              }
+              &:hover, &:focus {
+                cursor: pointer;
+              }
+
+              .trash-confirmation {
+                display: none;
+                position: absolute;
+                z-index: 999;
+                left: 0;
+                grid-template-columns: auto auto;
+                gap: 10px;
+                place-items: center;
+                place-content: center;
+                margin-top: 5.5px;
+                padding-left: 25px;
+                width: 57px;
+                height: 30px;
+                border-radius: 10px;
+
+                .trash-checkmark {
+                    font-size: 18px;
+                    color: rgb(18, 151, 18);
+                    user-select: none;
+                    cursor: pointer;
+                    input {
+                      display: none;
+                    }
+                }
+                .trash-cross {
+                    font-size: 18px;
+                    color: rgb(218, 3, 3);
+                    user-select: none;
+                    cursor: pointer;
+                }
+              }
             }
           }
 
           &__date {
+            grid-area: 3 / 2 / 4 / 3;
             justify-self: end;
             align-self: end;
 
