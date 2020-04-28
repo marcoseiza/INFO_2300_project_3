@@ -503,6 +503,13 @@ main .pins_container > input:checked + .pins_container__add .pins_container__add
   cursor: pointer;
 }
 
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw .required {
+  color: #a0a0a0;
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+}
+
 main .pins_container__add {
   position: relative;
 }
@@ -629,6 +636,15 @@ main .pins_container .pin__content__prevw__name {
       align-self: center;
   font-size: 1.4em;
   color: #2e2e2e;
+  text-decoration: none;
+}
+
+main .pins_container .pin__content__prevw__name:hover, main .pins_container .pin__content__prevw__name:focus {
+  margin: -0.3em -0.7em;
+  padding: 0.3em 0.7em 0.3em 0.7em;
+  border-top-right-radius: 0.7em;
+  border-bottom-right-radius: 0.7em;
+  background-color: #f4f4f4;
 }
 
 main .pins_container .pin__content__prevw__tags {

@@ -360,6 +360,12 @@ main {
                   cursor: pointer;
                 }
               }
+
+              .required {
+                color: color(icons);
+                position: absolute;
+                bottom: 20px; right: 24px;
+              }
             }
           }
         }
@@ -457,8 +463,15 @@ main {
             justify-self: start;
             align-self: center;
             font-size: 1.4em;
-
             color: color(main_text);
+            text-decoration: none;
+            &:hover, &:focus {
+              margin: -0.3em -0.7em;
+              padding: 0.3em 0.7em 0.3em 0.7em;
+              border-top-right-radius: 0.7em;
+              border-bottom-right-radius: 0.7em;
+              background-color: darken(color(cards), 3);
+            }
           }
 
           &__tags {

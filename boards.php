@@ -31,12 +31,12 @@ function board($id, $name, $color, $date, $name_update_message, $update_id) { ?>
     } ?>
     <input type="checkbox" name="edit_board" id="edit_board<?php echo $id?>" <?php echo $checked?>>
     <div class="board__info">
-      <span class="board__info__name">
+      <a  href="pins.php?board_id=<?php echo $id?>" class="board__info__name">
         <svg viewBox="0 0 28 22" style="--color:<?php echo htmlspecialchars($color)?>">
           <path d="M2 20 L2 2 l10 0 3 3 L26 5 L 26 20 Z"/>
         </svg>
         <span><?php echo htmlspecialchars($name)?></span>
-      </span>
+      </a>
       <span class="board__info__date"><?php echo htmlspecialchars($date)?></span>
       <div for="options" class="board__info__options">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
@@ -149,6 +149,7 @@ function board($id, $name, $color, $date, $name_update_message, $update_id) { ?>
         <?php if (!empty($name_add_message)) { ?>
         <span><?php echo $name_add_message ?>!</span>
         <?php } ?>
+        <span class="hoverme">psst...hover over the folder</span>
         <div class="name">
           <input type="color" name="board_color" id="board_color" value="#D3D3D3" oninput="board_add_color(this)">
           <label for="board_color">
@@ -156,6 +157,7 @@ function board($id, $name, $color, $date, $name_update_message, $update_id) { ?>
               <path d="M2 20 L2 2 l10 0 3 3 L26 5 L 26 20 Z"/>
             </svg>
           </label>
+          <span class="name__clickme">psst...click me</span>
           <input type="text" name="board_name" id="board_name"
                   value="<?php echo htmlspecialchars($name)?>"
                   placeholder="Board Name *" required>
@@ -164,6 +166,7 @@ function board($id, $name, $color, $date, $name_update_message, $update_id) { ?>
           Add Board
           <input type="submit" name="board_add_submit" id="board_add_submit">
         </label>
+        <span class="required">* Fields Are Required</span>
       </form>
     </div>
     <?php

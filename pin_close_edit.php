@@ -82,7 +82,7 @@
 
         <!-- list of preexisting tags in specific format so that they can be deleted -->
         <div id="update_form_pin_tag_list"><?php
-        foreach($tags as $key => $tag) {?><span id="form_tag_numb_<?php echo $key?>" style='background-color:<?php echo $tag["color"]?>'><?php echo htmlspecialchars($tag["name"])?></span><?php }?><input type="text" class="update_form_pin__prevw__tags" id="update_form_pin_tags" placeholder="add or delete"></div>
+        foreach($tags as $key => $tag) {?><span id="form_tag_numb_<?php echo $key?>" style='background-color:<?php echo $tag["color"]?>'><?php echo htmlspecialchars($tag["name"])?> </span><?php }?><input type="text" class="update_form_pin__prevw__tags" id="update_form_pin_tags" placeholder="add or delete pins"></div>
 
         <!-- make hidden value of the input by looping through existing tags -->
         <?php

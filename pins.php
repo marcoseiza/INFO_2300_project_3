@@ -69,7 +69,7 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
                                 "/>
                     </g>
                   </svg>
-                  <span id="add_form_pins_img_message">Upload Screenshot</span>
+                  <span id="add_form_pins_img_message">Upload Screenshot *</span>
                   <?php if (isset($_GET['image_message'])){?>
                   <span class="image_message"><?php echo $_GET['image_message']?></span>
                   <?php }?>
@@ -88,7 +88,7 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
                 </script>
               </div>
               <div class="add_form_pin__prevw">
-                <input type="text" class="add_form_pin__prevw__name" name="add_form_pin_name" id="add_form_pin_name" placeholder="Pin's name" required>
+                <input type="text" class="add_form_pin__prevw__name" name="add_form_pin_name" id="add_form_pin_name" placeholder="Pin's name *" required>
                 <?php if (isset($_GET['name_message'])){?>
                 <span class="name_message"><?php echo $_GET['name_message']?></span>
                 <?php }?>
@@ -97,7 +97,7 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
                   <input type="text" name="add_form_pin_tags" id="hidden_add_form_pin_tags">
                 </div>
                 <label for="add_form_pin_link" class="add_form_pin__prevw__link" >
-                  <input type="url" name="add_form_pin_link" id="add_form_pin_link" placeholder="URL of website" required>
+                  <input type="url" name="add_form_pin_link" id="add_form_pin_link" placeholder="URL of website *" required>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
                     <line x1="5" y1="15" x2="25" y2="15"/>
                     <path d="M25 15 l-5 -5 M25 15 l-5 5"/>
@@ -110,6 +110,7 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
                 <button type="submit" name="add_form_pin_submit" value="<?php echo $board_id?>">
                   Add Pin
                 </button>
+                <span class="required">* Fields Are Required</span>
               </div>
             </form>
             <script src="scripts/add_form_pin_tags.js"></script>
@@ -128,9 +129,9 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
               </a>
             </div>
             <div class="pin__content__prevw">
-              <span class="pin__content__prevw__name"><?php
+              <a href="pin_close.php?<?php echo http_build_query(array("id"=>$id, "board_id"=>$board_id))?>" class="pin__content__prevw__name"><?php
               echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($name)))?>
-              </span>
+              </a>
               <div for="options" class="pin__content__prevw__options">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
                   <circle cx="15" cy="5" r="3"/>

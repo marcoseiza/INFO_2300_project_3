@@ -10,6 +10,7 @@ body {
 }
 
 .back {
+  justify-self: flex-start;
   margin: 50px;
   margin-left: 65px;
   margin-bottom: 0;
@@ -189,19 +190,26 @@ form {
   }
 
   &__name {
-    width: 100%;
+    width: 307px;
     font-size: 2.7vw;
     font-weight: 300;
     border: none;
+    border-bottom: 1px solid color(icons);
+    &:focus, &:hover {
+      border-color: rgba(238, 94, 94, 1);
+    }
   }
 
   &__tags {
     position: relative;
+    width: 305px;
+    // overflow: scroll;
     font-size: 1vw;
     margin-bottom: 0.5vw;
 
     #update_form_pin_tag_list {
-      white-space: pre-line;
+      width: 100%;
+      white-space: normal;
       line-height: 2em;
       span{
         padding: 0.1em 0.3em;
@@ -256,7 +264,7 @@ form {
 
   textarea {
     resize: vertical;
-    width: 110%;
+    width: 303px;
     height: 16vw;
     border: 1px solid color(main_text);
     border-radius: 0.3em;
@@ -271,8 +279,10 @@ form {
   }
 
   button {
+    position: absolute;
+    bottom: 1.5em; right: 1.5em;
     font-family: Montserrat;
-    font-size: 1em;
+    font-size: 1.3em;
     height: 1.5em;
     background-color: rgba(238, 94, 94, 0.5);
     border: none;

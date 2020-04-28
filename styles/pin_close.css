@@ -117,6 +117,7 @@ main {
 
 .image {
   height: 36.6vw;
+  width: 65vw;
 }
 
 .image img {
@@ -128,12 +129,14 @@ main {
 
 .prevw {
   padding: 3vw;
+  padding-bottom: 0;
   position: relative;
   display: -ms-grid;
   display: grid;
+  height: 33.6vw;
   -ms-grid-rows: auto auto auto auto 1fr;
       grid-template-rows: auto auto auto auto 1fr;
-  gap: 1vw;
+  gap: 0.8vw;
   justify-items: flex-start;
   background-color: #fcfcfc;
   color: #2e2e2e;
@@ -141,7 +144,9 @@ main {
 
 .prevw__name {
   font-size: 2.7vw;
+  line-height: 2.7vw;
   font-weight: 300;
+  margin-bottom: 0.4vw;
 }
 
 .prevw > input {
@@ -313,6 +318,7 @@ main {
 
 .prevw__tags {
   font-size: 1vw;
+  line-height: 1.8vw;
   margin-bottom: 0.5vw;
 }
 
@@ -331,52 +337,52 @@ main {
 }
 
 .prevw__linkbox {
-  font-size: 1vw;
-  height: 1.4em;
+  justify-self: flex-start;
+  font-size: 15px;
   border: 1px solid #2e2e2e;
-  border-radius: 0.3em;
-  padding: 0.1em 0.3em;
-  overflow: hidden;
+  border-radius: 0.4em;
 }
 
 .prevw__linkbox a {
-  text-decoration: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  height: 1.4em;
+  height: 18px;
+  padding: 0.1em 0 0.1em 0.3em;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 30px;
+      grid-template-columns: auto 30px;
 }
 
 .prevw__linkbox a div {
-  line-height: 1.4em;
+  height: 18px;
+  max-width: 230px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .prevw__linkbox a svg {
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-  width: 1.8vw;
-  height: 1.8vw;
+  position: relative;
+  bottom: 3px;
+  width: 25px;
+  height: 25px;
   stroke: #2e2e2e;
-  stroke-width: 1.3;
+  stroke-width: 1.5;
+  stroke-linecap: round;
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
 }
 
 .prevw__date {
-  font-size: 1.2vw;
+  margin-top: 0.5vw;
+  font-size: 1vw;
 }
 
 .prevw__description {
   font-size: 1vw;
   width: 100%;
-  padding: 2vw 3vw;
-  margin: 2vw -3vw;
+  padding: 1.5vw 3vw 0 3vw;
+  margin: 1vw -3vw 2vw -3vw;
   border-top: 1px solid #a0a0a0;
+  overflow: scroll;
 }
 /*# sourceMappingURL=pin_close.css.map */

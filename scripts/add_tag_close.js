@@ -27,7 +27,7 @@ function addTag(tag) {
 
   // add tag
   const color = getColor()
-  input.insertAdjacentHTML("beforebegin", " <span id='form_tag_numb_" + tag_numb + "' style='background-color:" + color + ";'>" + escapeHtml(tag) + "</span>")
+  input.insertAdjacentHTML("beforebegin", "<span id='form_tag_numb_" + tag_numb + "' style='background-color:" + color + ";'>" + escapeHtml(tag) + " </span>")
   tag_numb += 1
   hidden_input.value += '#' + escapeHtml(tag) + ' ' + color
 
@@ -46,7 +46,7 @@ function deletePreviousTag () {
     tag_numb -= 1
     first_warning = false
     if (tag_numb == 0) {
-      input.placeholder = "add or delete"
+      input.placeholder = "add or delete pins"
     }
   } else {
     latest_tag = document.getElementById('form_tag_numb_' + (tag_numb - 1))

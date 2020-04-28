@@ -10,6 +10,7 @@ body {
 }
 
 .back {
+  justify-self: flex-start;
   margin: 50px;
   margin-left: 65px;
   margin-bottom: 0;
@@ -265,20 +266,27 @@ form {
 }
 
 .prevw__name {
-  width: 100%;
+  width: 307px;
   font-size: 2.7vw;
   font-weight: 300;
   border: none;
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.prevw__name:focus, .prevw__name:hover {
+  border-color: #ee5e5e;
 }
 
 .prevw__tags {
   position: relative;
+  width: 305px;
   font-size: 1vw;
   margin-bottom: 0.5vw;
 }
 
 .prevw__tags #update_form_pin_tag_list {
-  white-space: pre-line;
+  width: 100%;
+  white-space: normal;
   line-height: 2em;
 }
 
@@ -344,7 +352,7 @@ form {
 
 .prevw textarea {
   resize: vertical;
-  width: 110%;
+  width: 303px;
   height: 16vw;
   border: 1px solid #2e2e2e;
   border-radius: 0.3em;
@@ -360,8 +368,11 @@ form {
 }
 
 .prevw button {
+  position: absolute;
+  bottom: 1.5em;
+  right: 1.5em;
   font-family: Montserrat;
-  font-size: 1em;
+  font-size: 1.3em;
   height: 1.5em;
   background-color: rgba(238, 94, 94, 0.5);
   border: none;
