@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["update_form"])) {
 
   for ($i=0; $i<(sizeof($tags_input)); $i++) {
     $tag = explode(' ', $tags_input[$i]);
+    $tag[0] = filter_var($tag[0], FILTER_SANITIZE_STRING);
 
     if (!in_array($tag[0], $tag_names)) {
       array_push($tag_names, $tag[0]);
@@ -71,11 +72,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["update_form"])) {
     foreach($tags as $tag) {
       exec_sql_query($db, $sql_tag_add, array(":pin_id"=>$id, ":tag_name"=>$tag[0], ":tag_color"=>$tag[1]));
     }
-    $header_location = "Location: pin_close.php?id=" . $id . "&board_id=" . $board_id;
+    $header_location = "Location: pin_close.php?" . http_build_query(array("id"=>$id, "board_id"=>$board_id));
     header($header_location);
 
   } else {
-    $header_location = "Location: pin_close_edit.php?id=" . $id . "&board_id=" . $board_id;
+
+    $header_location = "Location: pin_close_edit.php?" . http_build_query(array("id"=>$id,
+                                                                                    "board_id"=>$board_id,
+                                                                                    "name_message"=>$name_message,
+                                                                                    "link_message"=>$link_message,
+                                                                                    "image_message"=>$image_message));
     header($header_location);
   }
 

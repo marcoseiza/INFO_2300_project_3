@@ -145,6 +145,26 @@ form {
   border: 1px dashed lightblue;
 }
 
+.image label span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.image label span .image_message {
+  position: relative;
+  top: 10px;
+  font-size: 0.8em;
+  color: #ee5e5e;
+}
+
 .image label span.file_uploaded {
   font-size: 1.2em;
   -webkit-animation: file_uploaded 500ms ease-in forwards;
@@ -230,6 +250,13 @@ form {
   gap: 1vw;
   justify-items: flex-start;
   color: #2e2e2e;
+}
+
+.prevw .name_message, .prevw .link_message {
+  position: relative;
+  bottom: 8px;
+  font-size: 0.8em;
+  color: #ee5e5e;
 }
 
 .prevw input, .prevw textarea {

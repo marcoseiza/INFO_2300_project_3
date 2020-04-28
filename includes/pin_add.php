@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["add_form_pin_submit"])
 
   for ($i=0; $i<(sizeof($tags_input)); $i++) {
     $tag = explode(' ', $tags_input[$i]);
+    $tag[0] = filter_var($tag[0], FILTER_SANITIZE_STRING);
 
     if (!in_array($tag[0], $tag_names)) {
       array_push($tag_names, $tag[0]);
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["add_form_pin_submit"])
 
   $valid = TRUE;
 
-  if (!preg_match("/^[0-9A-Za-z',. _-]*$/", $name)) {$valid = FALSE; $name_message = "Invalid pin name";}
+  if (!preg_match("/^[0-9A-Za-z&',. _-]*$/", $name)) {$valid = FALSE; $name_message = "Invalid pin name";}
 
   if (filter_var($link, FILTER_VALIDATE_URL) === FALSE) {
     $valid = FALSE; $link_message = "Invalid url";
@@ -68,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["add_form_pin_submit"])
     $name = filter_var($name, FILTER_SANITIZE_STRING);
     $link = filter_var($link, FILTER_SANITIZE_URL);
     $notes = filter_var($notes, FILTER_SANITIZE_STRING);
+    date_default_timezone_set('America/New_York');
     $date = date('F d, Y');
 
     $image_ext = pathinfo($image['name'], PATHINFO_EXTENSION);
@@ -97,10 +99,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["add_form_pin_submit"])
     foreach($tags as $tag) {
       exec_sql_query($db, $sql_tag, array(":pin_id"=>$pin_id[0]["id"], ":tag_name"=>$tag[0], ":tag_color"=>$tag[1]));
     }
+
+    $header_location = "Location: pins.php?" . http_build_query(array("board_id"=>$board_id));
+
+  } else {
+    $checked = "checked";
+    $header_location = "Location: pins.php?" . http_build_query(array("board_id"=>$board_id,
+                                                                      "checked"=>$checked,
+                                                                      "name_message"=>$name_message,
+                                                                      "link_message"=>$link_message,
+                                                                      "image_message"=>$image_message));
   }
 
   //redirect to board
-  $header_location = "Location: pins.php?board_id=" . $board_id;
   header($header_location);
 }
 

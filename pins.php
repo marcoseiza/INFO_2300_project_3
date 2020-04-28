@@ -3,6 +3,7 @@ include("includes/init.php");
 include("includes/pin_add.php");
 include("includes/pin_delete.php");
 $board_id = htmlspecialchars($_GET["board_id"]);
+$board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", array(":id"=>$board_id))->fetchAll())[0]["name"];
 ?>
 
 <!DOCTYPE html>
@@ -15,15 +16,17 @@ $board_id = htmlspecialchars($_GET["board_id"]);
   <title>Document</title>
 </head>
 <body>
-  <div class="back">
-    <a href="index.php">
+  <header>
+    <a href="index.php">Weboard</a>
+    <span>
+      <a href="boards.php">Boards</a>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
         <path d="M5 15 l20 0 M25 15 l-10 -10 M25 15 l-10 10"/>
       </svg>
-      <span>Back</span>
-    </a>
-  </div>
-  <main>
+      <span class="current"><?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($board_name)))?></span></span>
+  </header>
+
+  <main id="main">
     <?php if(isset($_GET["tag_name"])) { ?>
       <div class="tags">
           <span>Active Tag:</span>
@@ -36,7 +39,7 @@ $board_id = htmlspecialchars($_GET["board_id"]);
       </div>
     <?php }?>
     <div class="pins_container">
-      <input type="checkbox" name="add_pin" id="add_pin">
+      <input type="checkbox" name="add_pin" id="add_pin" <?php echo $_GET['checked']?>>
       <div class="pins_container__add">
         <div class="pins_container__add__content">
           <label for="add_pin">
@@ -67,6 +70,9 @@ $board_id = htmlspecialchars($_GET["board_id"]);
                     </g>
                   </svg>
                   <span id="add_form_pins_img_message">Upload Screenshot</span>
+                  <?php if (isset($_GET['image_message'])){?>
+                  <span class="image_message"><?php echo $_GET['image_message']?></span>
+                  <?php }?>
                 </label>
                 <script>
                   function pinImgUploaded() {
@@ -83,6 +89,9 @@ $board_id = htmlspecialchars($_GET["board_id"]);
               </div>
               <div class="add_form_pin__prevw">
                 <input type="text" class="add_form_pin__prevw__name" name="add_form_pin_name" id="add_form_pin_name" placeholder="Pin's name" required>
+                <?php if (isset($_GET['name_message'])){?>
+                <span class="name_message"><?php echo $_GET['name_message']?></span>
+                <?php }?>
                 <div id="add_form_pin_tag_container">
                   <div id="add_form_pin_tag_list"><input type="text" class="add_form_pin__prevw__tags" id="add_form_pin_tags" placeholder="#tag1 #tag2 #tag3"></div>
                   <input type="text" name="add_form_pin_tags" id="hidden_add_form_pin_tags">
@@ -94,6 +103,9 @@ $board_id = htmlspecialchars($_GET["board_id"]);
                     <path d="M25 15 l-5 -5 M25 15 l-5 5"/>
                   </svg>
                 </label>
+                <?php if (isset($_GET['link_message'])){?>
+                <span class="link_message"><?php echo $_GET['link_message']?></span>
+                <?php }?>
                 <textarea name="add_form_pin_notes" placeholder="Place Your Notes Here"></textarea>
                 <button type="submit" name="add_form_pin_submit" value="<?php echo $board_id?>">
                   Add Pin
@@ -104,12 +116,8 @@ $board_id = htmlspecialchars($_GET["board_id"]);
           </div>
         </div>
       </div>
+
       <?php
-
-      if ($board_id === NULL) {
-        echo "<a href='pins.php?board_id=1'>NEED TO CLICK HERE TO GO TO BOARD 1 THIS IS NOT A BOARD WHERE YOU CAN ADD PINS</a>";
-      }
-
       // tags.name, pins.id, pins.name, pins.link, pins.description, images.src, images.description
       function pin($board_id, $id, $name, $link, $date, $image_src, $image_desc, $tags) { ?>
         <li class="pin pin_<?php echo htmlspecialchars($id)?>">

@@ -14,51 +14,52 @@ a {
           user-select: none;
 }
 
-.back {
-  padding: 40px 0 40px 5vw;
-  border-bottom: 1px solid #a0a0a0;
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 99999;
+  top: 0;
+  background-color: #fcfcfc;
+  padding: 10px 20px;
+  font-size: 25px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
 }
 
-.back a {
+header a {
+  text-decoration: none;
+  color: #a0a0a0;
+}
+
+header a:hover {
+  color: #545454;
+}
+
+header > span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  text-decoration: none;
+  margin-left: 20px;
+  padding-left: 20px;
+  color: #a0a0a0;
+  border-left: 1px solid #a0a0a0;
 }
 
-.back a svg {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  stroke: #2e2e2e;
+header > span svg {
+  margin: 0 10px 0 10px;
+  width: 25px;
+  stroke: #a0a0a0;
+  stroke-width: 1.7;
   stroke-linecap: round;
-  stroke-width: 1.2;
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  stroke-linejoin: round;
 }
 
-.back a span {
-  font-size: 30px;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: #2e2e2e;
-}
-
-.back a:hover span, .back a:focus span {
-  font-weight: 400;
-}
-
-.back a:hover svg, .back a:focus svg {
-  stroke-width: 1.8;
+header > span .current {
+  color: #545454;
 }
 
 main {
@@ -141,6 +142,7 @@ main .pins_container > input:checked + .pins_container__add .pins_container__add
   background-color: #fcfcfc;
   -webkit-transition: background-color 200ms ease-in-out 200ms;
   transition: background-color 200ms ease-in-out 200ms;
+  border: 1px solid lightgray;
 }
 
 main .pins_container > input:checked + .pins_container__add .pins_container__add__content > label {
@@ -218,6 +220,7 @@ main .pins_container > input:checked + .pins_container__add .pins_container__add
 }
 
 main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img {
+  border-top: 1px solid lightgray;
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -284,6 +287,13 @@ main .pins_container > input:checked + .pins_container__add .pins_container__add
   color: #2e2e2e;
   -webkit-transition: color 200ms ease-in-out;
   transition: color 200ms ease-in-out;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__img label .image_message {
+  position: relative;
+  top: 1em;
+  font-size: 0.8em;
+  color: #ee5e5e;
 }
 
 @-webkit-keyframes file_uploaded {
@@ -364,6 +374,11 @@ main .pins_container > input:checked + .pins_container__add .pins_container__add
           align-items: flex-start;
   row-gap: 10px;
   color: #2e2e2e;
+}
+
+main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw .name_message, main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw .link_message {
+  font-size: 0.8em;
+  color: #ee5e5e;
 }
 
 main .pins_container > input:checked + .pins_container__add .pins_container__add__content__form .add_form_pin__prevw input {
@@ -557,6 +572,7 @@ main .pins_container .pin {
   list-style: none;
   background-color: #fcfcfc;
   position: relative;
+  border: 1px solid lightgray;
 }
 
 main .pins_container .pin__content {
@@ -574,6 +590,7 @@ main .pins_container .pin__content {
 main .pins_container .pin__content__img {
   background-color: grey;
   overflow: hidden;
+  border-bottom: 1px solid lightgray;
 }
 
 main .pins_container .pin__content__img img {
@@ -745,6 +762,7 @@ main .pins_container .pin__content__prevw .options_menu a {
   text-decoration: none;
   text-transform: capitalize;
   color: #2e2e2e;
+  cursor: pointer;
 }
 
 main .pins_container .pin__content__prevw .options_menu a:hover, main .pins_container .pin__content__prevw .options_menu a:focus {
@@ -821,11 +839,10 @@ main .pins_container .pin__content__prevw .options_menu__trash .trash-confirmati
   left: 0;
   -ms-grid-columns: auto auto;
       grid-template-columns: auto auto;
-  gap: 10px;
-  place-items: center;
+  gap: 17px;
   place-content: center;
   margin-top: 5.5px;
-  padding-left: 25px;
+  padding-left: 16px;
   width: 57px;
   height: 30px;
   border-radius: 10px;

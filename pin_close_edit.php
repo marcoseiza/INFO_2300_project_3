@@ -53,7 +53,12 @@
                       "/>
           </g>
         </svg>
-        <span id="update_form_pins_img_message">Upload Screenshot</span>
+        <span id="update_form_pins_img_message">
+          Upload New Screenshot
+          <?php if (isset($_GET['image_message'])){?>
+          <span class="image_message"><?php echo $_GET['image_message']?></span>
+          <?php }?>
+        </span>
       </label>
       <script>
         function pinImgUploaded() {
@@ -70,6 +75,9 @@
     </div>
     <div class="prevw">
       <input type="text" name="update_form_pin_name" id="name" class="prevw__name" value="<?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($pin["name"])))?>">
+      <?php if (isset($_GET['name_message'])){?>
+      <span class="name_message"><?php echo $_GET['name_message']?></span>
+      <?php }?>
       <div class="prevw__tags">
 
         <!-- list of preexisting tags in specific format so that they can be deleted -->
@@ -93,6 +101,9 @@
           <path d="M25 15 l-5 -5 M25 15 l-5 5"/>
         </svg>
       </label>
+      <?php if (isset($_GET['link_message'])){?>
+      <span class="link_message"><?php echo $_GET['link_message']?></span>
+      <?php }?>
       <div class="prevw__description">
         <textarea name="update_form_pin_notes" placeholder="Place Your Notes Here"><?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($pin[4])))?></textarea>
       </div>

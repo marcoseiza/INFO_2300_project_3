@@ -1,1 +1,759 @@
-/* No CSS *//*# sourceMappingURL=boards.css.map */
+body {
+  margin: 0;
+  width: 100vw;
+  font-family: Montserrat;
+  background-color: #f4f7f6;
+}
+
+a {
+  cursor: pointer;
+}
+
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 99999;
+  top: 0;
+  background-color: #fcfcfc;
+  padding: 10px 20px;
+  font-size: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+header a {
+  text-decoration: none;
+  color: #a0a0a0;
+}
+
+header a:hover {
+  color: #545454;
+}
+
+header > span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 20px;
+  padding-left: 20px;
+  color: #a0a0a0;
+  border-left: 1px solid #a0a0a0;
+}
+
+header > span svg {
+  margin: 0 10px 0 10px;
+  width: 25px;
+  stroke: #a0a0a0;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+header > span .current {
+  color: #545454;
+}
+
+main {
+  margin: 50px 50px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (400px)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 400px);
+  gap: 20px;
+  padding: 50px;
+}
+
+main > input {
+  display: none;
+}
+
+main > input:checked + .add_board {
+  border: 1px solid lightgray;
+  background-color: #fcfcfc;
+  -webkit-transition: background-color 200ms ease-in-out;
+  transition: background-color 200ms ease-in-out;
+}
+
+main > input:checked + .add_board > label {
+  position: absolute;
+  z-index: 9;
+  background-color: #fcfcfc;
+  -webkit-transform: scale(0.5) translate(-50%, -50%);
+          transform: scale(0.5) translate(-50%, -50%);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+  -webkit-animation: board_add_position 400ms ease-in-out forwards;
+          animation: board_add_position 400ms ease-in-out forwards;
+  -webkit-transition: background-color 400ms ease-in-out, -webkit-transform 200ms ease-in-out 200ms;
+  transition: background-color 400ms ease-in-out, -webkit-transform 200ms ease-in-out 200ms;
+  transition: transform 200ms ease-in-out 200ms, background-color 400ms ease-in-out;
+  transition: transform 200ms ease-in-out 200ms, background-color 400ms ease-in-out, -webkit-transform 200ms ease-in-out 200ms;
+}
+
+main > input:checked + .add_board > label svg {
+  stroke: #a0a0a0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
+}
+
+@-webkit-keyframes board_add_position {
+  0% {
+    top: 50%;
+    left: 50%;
+  }
+  50% {
+    top: 30px;
+    left: 50%;
+  }
+  100% {
+    top: 30px;
+    left: 30px;
+  }
+}
+
+@keyframes board_add_position {
+  0% {
+    top: 50%;
+    left: 50%;
+  }
+  50% {
+    top: 30px;
+    left: 50%;
+  }
+  100% {
+    top: 30px;
+    left: 30px;
+  }
+}
+
+main > input:checked + .add_board form {
+  opacity: 1;
+  pointer-events: all;
+  -webkit-transition: opacity 400ms ease-in-out;
+  transition: opacity 400ms ease-in-out;
+}
+
+main .add_board {
+  position: relative;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+main .add_board > label {
+  background-color: rgba(238, 94, 94, 0.596);
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  z-index: 9;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+main .add_board > label:hover, main .add_board > label:focus {
+  background-color: rgba(238, 94, 94, 0.849);
+}
+
+main .add_board > label svg {
+  width: 60px;
+  stroke: #f4f7f6;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+main .add_board form {
+  opacity: 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 20px;
+      grid-template-rows: 1fr 20px;
+  pointer-events: none;
+  padding: 20px;
+}
+
+main .add_board form > span {
+  position: absolute;
+  bottom: 135px;
+  left: 120px;
+  color: rgba(238, 94, 94, 0.9);
+}
+
+main .add_board form .name {
+  -ms-grid-row-align: center;
+      align-self: center;
+  padding: 5px 20px;
+  position: relative;
+  font-size: 1.4em;
+  color: #2e2e2e;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 70px 240px;
+      grid-template-columns: 70px 240px;
+  gap: 10px;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+main .add_board form .name #board_color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+main .add_board form .name #board_color:focus + label svg {
+  -webkit-animation: svg_colors 5s infinite;
+          animation: svg_colors 5s infinite;
+  opacity: 0.5;
+}
+
+main .add_board form .name label {
+  position: relative;
+  cursor: pointer;
+  margin-bottom: -5px;
+}
+
+main .add_board form .name label:hover svg {
+  -webkit-animation: svg_colors 5s infinite;
+          animation: svg_colors 5s infinite;
+  opacity: 0.5;
+}
+
+main .add_board form .name label svg {
+  --color: lightgrey;
+  width: 60px;
+  fill: var(--color);
+  stroke: var(--color);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+main .add_board form .name #board_name {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #a0a0a0;
+  font-family: Montserrat;
+  font-size: 1em;
+  color: #2e2e2e;
+}
+
+main .add_board form .board__add__submit {
+  justify-self: flex-end;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  font-size: 1.2em;
+  background-color: rgba(238, 94, 94, 0.7);
+  color: white;
+  cursor: pointer;
+}
+
+main .add_board form .board__add__submit:hover, main .add_board form .board__add__submit:focus {
+  background-color: rgba(238, 94, 94, 0.9);
+}
+
+main .add_board form .board__add__submit input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+main .board {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 245px 1fr;
+      grid-template-rows: 245px 1fr;
+  width: 400px;
+}
+
+main .board__iframe_wrap {
+  width: 400px;
+  height: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(131, 131, 131, 0.116);
+  border: 1px solid lightgray;
+}
+
+main .board__iframe_wrap:hover .board__iframe_container, main .board__iframe_wrap:focus .board__iframe_container {
+  -webkit-transform: scale(1.02) translate(0, -3px);
+          transform: scale(1.02) translate(0, -3px);
+}
+
+main .board__iframe_container {
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+  position: relative;
+  -webkit-transition: -webkit-transform 200ms ease-in-out;
+  transition: -webkit-transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
+  transition: transform 200ms ease-in-out, -webkit-transform 200ms ease-in-out;
+}
+
+main .board__iframe_container iframe {
+  pointer-events: none;
+  display: block;
+  position: relative;
+  top: -15px;
+  left: -5px;
+  width: 1338px;
+  height: 860px;
+  scale: 0.275;
+  -webkit-transform-origin: 0 0;
+          transform-origin: 0 0;
+}
+
+main .board > input {
+  display: none;
+}
+
+main .board > input:checked ~ .board__info {
+  display: none;
+}
+
+main .board > input:checked ~ .board__edit {
+  display: -ms-grid;
+  display: grid;
+}
+
+main .board__info {
+  border: 1px solid lightgray;
+  background-color: #fcfcfc;
+  height: 70px;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-area: 2 / 1 / 3 / -1;
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+  gap: 20px;
+  padding: 20px;
+}
+
+main .board__info__name {
+  -ms-flex-item-align: center;
+      align-self: center;
+  font-size: 1.4em;
+  color: #2e2e2e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main .board__info__name span {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  margin-left: 0.6em;
+}
+
+main .board__info__name > svg {
+  --color: lightgrey;
+  width: 40px;
+  fill: var(--color);
+  stroke: var(--color);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+main .board__info__date {
+  color: #2e2e2e;
+}
+
+main .board__info > input {
+  display: none;
+}
+
+main .board__info > input:checked ~ .board__info__options_menu {
+  display: -ms-grid;
+  display: grid;
+}
+
+main .board__info__options {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+}
+
+main .board__info__options svg {
+  width: 23px;
+  fill: #a0a0a0;
+}
+
+main .board__info__options:hover, main .board__info__options:focus {
+  cursor: pointer;
+}
+
+main .board__info__options:hover svg, main .board__info__options:focus svg {
+  fill: #2e2e2e;
+}
+
+main .board__info__options_menu {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  top: 15px;
+  right: 15px;
+  background-color: #fcfcfc;
+  -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+}
+
+main .board__info__options_menu > label {
+  padding: 10px 10px 7px 20px;
+  height: 30px;
+  margin-right: -1.5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: #2e2e2e;
+  cursor: pointer;
+}
+
+main .board__info__options_menu > label:hover, main .board__info__options_menu > label:focus {
+  background-color: #e3e3e3;
+}
+
+main .board__info__options_menu > label:hover svg, main .board__info__options_menu > label:focus svg {
+  stroke: #2e2e2e;
+}
+
+main .board__info__options_menu > label svg {
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  width: 30px;
+  stroke: #a0a0a0;
+  stroke-width: 2;
+  fill: none;
+  margin-left: 9px;
+}
+
+main .board__info__options_menu__trash {
+  padding: 5px 10px 10px 20px;
+  position: relative;
+  z-index: 9999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main .board__info__options_menu__trash:hover, main .board__info__options_menu__trash:focus {
+  background-color: #e3e3e3;
+}
+
+main .board__info__options_menu__trash:hover svg, main .board__info__options_menu__trash:focus svg {
+  stroke: #2e2e2e;
+}
+
+main .board__info__options_menu__trash .delete_title {
+  margin-top: 5.5px;
+  margin-right: 7px;
+  white-space: nowrap;
+  text-transform: capitalize;
+  color: #2e2e2e;
+}
+
+main .board__info__options_menu__trash svg {
+  margin-right: -5.5px;
+  width: 35px;
+  stroke: #a0a0a0;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+main .board__info__options_menu__trash svg g.lid {
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+main .board__info__options_menu__trash:hover, main .board__info__options_menu__trash:focus {
+  cursor: pointer;
+}
+
+main .board__info__options_menu__trash .trash-confirmation {
+  display: none;
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+  gap: 17px;
+  place-content: center;
+  margin-top: 5.5px;
+  padding-left: 16px;
+  width: 57px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+main .board__info__options_menu__trash .trash-confirmation .trash-checkmark {
+  font-size: 18px;
+  color: #129712;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+
+main .board__info__options_menu__trash .trash-confirmation .trash-checkmark input {
+  display: none;
+}
+
+main .board__info__options_menu__trash .trash-confirmation .trash-cross {
+  font-size: 18px;
+  color: #da0303;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+
+main .board__edit {
+  border: 1px solid lightgray;
+  background-color: #fcfcfc;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-area: 2 / 1 / 3 / -1;
+  position: relative;
+  display: none;
+  -ms-grid-rows: 1.4em 70px 1.4em;
+      grid-template-rows: 1.4em 70px 1.4em;
+  gap: 10px;
+  padding: 20px 20px;
+}
+
+main .board__edit__exit {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: flex-end;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  height: 20px;
+  cursor: pointer;
+}
+
+main .board__edit__exit:hover svg {
+  stroke: #2e2e2e;
+}
+
+main .board__edit__exit svg {
+  stroke: #a0a0a0;
+  stroke-linecap: round;
+  stroke-width: 3;
+  width: 20px;
+}
+
+main .board__edit > span {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 1 / 1 / 2 / 2;
+  justify-self: flex-start;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-left: -3px;
+  font-size: 1.6em;
+  color: #2e2e2e;
+}
+
+main .board__edit .message {
+  position: absolute;
+  font-size: 0.9em;
+  top: 100px;
+  left: 58px;
+  color: rgba(238, 94, 94, 0.9);
+}
+
+main .board__edit__name {
+  -ms-grid-row-align: center;
+      align-self: center;
+  padding-top: 5px;
+  position: relative;
+  font-size: 1.4em;
+  color: #2e2e2e;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 40px 100px;
+      grid-template-columns: 40px 100px;
+}
+
+main .board__edit__name .board_color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+main .board__edit__name .board_color:focus + label svg {
+  -webkit-animation: svg_colors 5s infinite;
+          animation: svg_colors 5s infinite;
+  opacity: 0.5;
+}
+
+main .board__edit__name label {
+  position: relative;
+  cursor: pointer;
+}
+
+main .board__edit__name label:hover svg {
+  -webkit-animation: svg_colors 5s infinite;
+          animation: svg_colors 5s infinite;
+  opacity: 0.5;
+}
+
+main .board__edit__name label svg {
+  --color: lightgrey;
+  width: 40px;
+  fill: var(--color);
+  stroke: var(--color);
+  stroke-width: 4;
+  stroke-linejoin: round;
+}
+
+main .board__edit__name #board_name {
+  justify-self: flex-start;
+  width: 300px;
+  margin-left: 0.6em;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #a0a0a0;
+  font-family: Montserrat;
+  font-size: 1em;
+  color: #2e2e2e;
+}
+
+main .board__edit__name #board_name:hover, main .board__edit__name #board_name:focus {
+  border-color: #ee5e5e;
+}
+
+@-webkit-keyframes svg_colors {
+  0% {
+    fill: red;
+    stroke: red;
+  }
+  25% {
+    fill: yellow;
+    stroke: yellow;
+  }
+  50% {
+    fill: blue;
+    stroke: blue;
+  }
+  75% {
+    fill: green;
+    stroke: green;
+  }
+  100% {
+    fill: red;
+    stroke: red;
+  }
+}
+
+@keyframes svg_colors {
+  0% {
+    fill: red;
+    stroke: red;
+  }
+  25% {
+    fill: yellow;
+    stroke: yellow;
+  }
+  50% {
+    fill: blue;
+    stroke: blue;
+  }
+  75% {
+    fill: green;
+    stroke: green;
+  }
+  100% {
+    fill: red;
+    stroke: red;
+  }
+}
+
+main .board__edit__submit {
+  justify-self: flex-end;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  font-size: 1.2em;
+  background-color: rgba(238, 94, 94, 0.7);
+  color: white;
+  cursor: pointer;
+}
+
+main .board__edit__submit:hover, main .board__edit__submit:focus {
+  background-color: rgba(238, 94, 94, 0.9);
+}
+
+main .board__edit__submit input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+/*# sourceMappingURL=boards.css.map */

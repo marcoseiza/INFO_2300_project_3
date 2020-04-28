@@ -11,7 +11,37 @@
 </head>
 
 <body>
-  <a href="pins.php?board_id=1">CLICK HERE TO GO TO BOARD 1</a>
+  <header>
+    <a href="index.php">Weboard</a>
+  </header>
+  <div class="main">
+    <span class="main__title">
+      <span>Better Organization,</span>
+      <span>Better Inspiration,</span>
+      <span>Better Design.</span>
+    </span>
+    <p class="main__subtitle">Weboard helps you organize your web inspiration for all of your projects.</p>
+  </div>
+  <a href="boards.php">MAKE A BOARD</a>
+  <div class="graphic">
+    <span>psst...click the boxes!</span>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <div onclick="changecolor(this)"></div>
+    <script>
+      let divs = document.querySelectorAll('.graphic div')
+      divs.forEach(changecolor)
+      function changecolor(el) {
+        el.style = '--color: hsl(' + Math.floor(360 * Math.random()) + ',100%,' + Math.floor(35 + 15 * Math.random()) + '%)'
+      }
+    </script>
+  </div>
 </body>
 
 </html>

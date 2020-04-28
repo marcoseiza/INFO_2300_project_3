@@ -13,40 +13,45 @@ a {
   user-select: none;
 }
 
-.back {
-  padding: 40px 0 40px 5vw;
-  border-bottom: 1px solid color(icons);
+header {
+  position: sticky;
+  z-index: 99999;
+  top: 0;
+  background-color: color(cards);
+  padding: 10px 20px;
+  font-size: 25px;
   display: flex;
-  justify-content: flex-start;
+
   a {
+    text-decoration: none;
+    color: color(icons);
+    &:hover {
+      color: darken(color(icons), 30);
+    }
+  }
+
+  > span {
     display: flex;
     align-items: center;
-    text-decoration: none;
+    margin-left: 20px;
+    padding-left: 20px;
+    color: color(icons);
+    border-left: 1px solid color(icons);
     svg {
-      width: 40px; height: 40px;
-      margin-right: 10px;
-      stroke: color(main_text);
+      margin: 0 10px 0 10px;
+      width: 25px;
+      stroke: color(icons);
+      stroke-width: 1.7;
       stroke-linecap: round;
-      stroke-width: 1.2;
-      transform: rotate(180deg);
-    }
-    span {
-      font-size: 30px;
-      font-weight: 300;
-      text-transform: uppercase;
-      color: color(main_text);
+      stroke-linejoin: round;
     }
 
-    &:hover, &:focus {
-      span {
-        font-weight: 400;
-      }
-      svg {
-        stroke-width: 1.8;
-      }
+    .current {
+      color: darken(color(icons), 30);
     }
   }
 }
+
 
 main {
   margin: 5vw 5vw;
@@ -103,6 +108,7 @@ main {
       &:checked + .pins_container__add .pins_container__add__content {
         background-color: color(cards);
         transition: background-color 200ms ease-in-out 200ms;
+        border: 1px solid lighten(color(icons), 20);
         > label {
           position: absolute;
           z-index: 9;
@@ -138,6 +144,7 @@ main {
           transition: opacity 200ms ease-in-out 400ms,
                       visibility 200ms ease-in-out 400ms;
           width: 100%; height: 100%;
+
           .add_form_pin {
             width: 100%; height: 100%;
             display: grid;
@@ -145,6 +152,7 @@ main {
             grid-template-rows: 4fr 7fr;
 
             &__img {
+              border-top: 1px solid lighten(color(icons), 20);
               position: relative;
               display: flex;
               align-items: center; justify-content: center;
@@ -184,6 +192,13 @@ main {
                   animation: file_uploaded 500ms ease-in forwards;
                   color: color(main_text);
                   transition: color 200ms ease-in-out;
+                }
+
+                .image_message {
+                  position: relative;
+                  top: 1em;
+                  font-size: 0.8em;
+                  color: rgba(238, 94, 94, 1);
                 }
 
                 @keyframes file_uploaded {
@@ -235,6 +250,11 @@ main {
               align-items: flex-start;
               row-gap: 10px;
               color: color(main_text);
+
+              .name_message, .link_message {
+                font-size: 0.8em;
+                color: rgba(238, 94, 94, 1)
+              }
 
               input {
                 font-family: Montserrat;
@@ -398,6 +418,7 @@ main {
       list-style: none;
       background-color: color(cards);
       position: relative;
+      border: 1px solid lighten(color(icons), 20);
 
       &__content {
         position: absolute;
@@ -410,6 +431,7 @@ main {
         &__img {
           background-color: grey;
           overflow: hidden;
+          border-bottom: 1px solid lighten(color(icons), 20);
           img {
             height: 100%; width: 100%;
             object-fit: cover;
@@ -532,6 +554,7 @@ main {
               text-decoration: none;
               text-transform: capitalize;
               color: color(main_text);
+              cursor: pointer;
               &:hover, &:focus {
                 background-color: darken(color(cards), 10);
                 svg {
@@ -590,11 +613,10 @@ main {
                 z-index: 999;
                 left: 0;
                 grid-template-columns: auto auto;
-                gap: 10px;
-                place-items: center;
+                gap: 17px;
                 place-content: center;
                 margin-top: 5.5px;
-                padding-left: 25px;
+                padding-left: 16px;
                 width: 57px;
                 height: 30px;
                 border-radius: 10px;

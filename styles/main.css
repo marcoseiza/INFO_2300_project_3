@@ -1,1 +1,118 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: #f4f7f6;
+  font-family: Montserrat;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 51px 1fr;
+      grid-template-rows: 51px 1fr;
+}
+
+header {
+  background-color: #fcfcfc;
+  padding: 10px 20px;
+  font-size: 25px;
+}
+
+header a {
+  text-decoration: none;
+  color: #a0a0a0;
+}
+
+header a:hover {
+  color: #6d6d6d;
+}
+
+.main {
+  position: relative;
+  z-index: 9;
+  pointer-events: none;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+}
+
+.main__title {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  font-size: 80px;
+  letter-spacing: -3px;
+  line-height: 85px;
+  margin: 0 130px;
+  color: #2e2e2e;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main__subtitle {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin: 20px 0 0 138px;
+  font-size: 25px;
+  line-height: 38px;
+  color: #3a3a3a;
+  width: 500px;
+}
+
+body > a {
+  position: absolute;
+  bottom: 200px;
+  left: 137px;
+  text-decoration: none;
+  background-color: rgba(238, 94, 94, 0.7);
+  border-radius: 0.2em;
+  color: white;
+  font-size: 40px;
+  padding: 5px 8px;
+}
+
+body > a:hover, body > a:focus {
+  background-color: #ee5e5e;
+}
+
+.graphic {
+  position: absolute;
+  bottom: 110px;
+  left: 570px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (250px)[3];
+      grid-template-columns: repeat(3, 250px);
+  -ms-grid-rows: (175px)[3];
+      grid-template-rows: repeat(3, 175px);
+  gap: 15px;
+}
+
+.graphic:hover span {
+  opacity: 0.4;
+}
+
+.graphic span {
+  position: absolute;
+  top: -26px;
+  left: 305px;
+  color: #a0a0a0;
+  opacity: 0;
+  -webkit-transition: opacity 200ms ease-in-out 1s;
+  transition: opacity 200ms ease-in-out 1s;
+}
+
+.graphic div {
+  --color: rgb(238, 94, 94);
+  background-color: var(--color);
+  opacity: 0.1;
+}
+
+.graphic div:hover {
+  background-color: var(--color);
+  opacity: 0.15;
+}
+/*# sourceMappingURL=main.css.map */

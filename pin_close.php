@@ -7,6 +7,7 @@
   $pin = exec_sql_query($db, $get_pin, array(":id" => $_GET["id"]))->fetchAll();
   $tags = exec_sql_query($db, $get_tags, array(":id" => $_GET["id"]))->fetchAll();
   $board_id = $_GET['board_id'];
+  $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", array(":id"=>$board_id))->fetchAll())[0]["name"];
   $pin = $pin[0];
 ?>
 
@@ -20,8 +21,24 @@
   <link rel="stylesheet" href="styles/pin_close.css">
 </head>
 <body>
+  <header>
+    <a href="index.php">Weboard</a>
+    <span>
+      <a href="boards.php">Boards</a>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+        <path d="M5 15 l20 0 M25 15 l-10 -10 M25 15 l-10 10"/>
+      </svg>
+      <a href="pins.php?<?php echo http_build_query(array('board_id'=>$board_id)) ?>">
+        <?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($board_name)))?>
+      </a>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
+        <path d="M5 15 l20 0 M25 15 l-10 -10 M25 15 l-10 10"/>
+      </svg>
+      <span class="current"><?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($pin["name"])))?></span>
+    </span>
+  </header>
   <div class="back">
-    <a href="pins.php?board_id=<?php echo $_GET["board_id"]?>">
+    <a href="pins.php?<?php echo http_build_query(array('board_id'=>$board_id)) ?>">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30">
         <path d="M5 15 l20 0 M25 15 l-10 -10 M25 15 l-10 10"/>
       </svg>

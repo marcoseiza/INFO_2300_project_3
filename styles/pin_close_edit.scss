@@ -105,6 +105,18 @@ form {
       }
     }
 
+    span {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .image_message {
+        position: relative;
+        top: 10px;
+        font-size: 0.8em;
+        color: rgba(238, 94, 94, 1);
+      }
+    }
+
     span.file_uploaded {
       font-size: 1.2em;
       animation: file_uploaded 500ms ease-in forwards;
@@ -163,6 +175,13 @@ form {
   gap: 1vw;
   justify-items: flex-start;
   color: color(main_text);
+
+  .name_message, .link_message {
+    position: relative;
+    bottom: 8px;
+    font-size: 0.8em;
+    color: rgba(238, 94, 94, 1);
+  }
 
   input, textarea {
     background-color: transparent;

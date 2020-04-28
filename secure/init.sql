@@ -4,7 +4,8 @@ BEGIN TRANSACTION;
 CREATE TABLE `boards` (
   `id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
   `name`	TEXT NOT NULL,
-  `color`	TEXT NOT NULL
+  `color`	TEXT NOT NULL,
+  `date` TEXT NOT NULL
 );
 
 CREATE TABLE `pins` (
@@ -31,7 +32,10 @@ CREATE TABLE `images` (
 );
 
 
-INSERT INTO 'boards' ('name', 'color') VALUES ('Test_board', 'blue');
+INSERT INTO 'boards' ('name', 'color', 'date') VALUES ('Test_board', '#ffd45e', 'April 27, 2020');
+INSERT INTO 'boards' ('name', 'color', 'date') VALUES ('Test_board', '#61b5fa', 'April 25, 2020');
+INSERT INTO 'boards' ('name', 'color', 'date') VALUES ('Test_board', '#5df0b0', 'April 24, 2020');
+INSERT INTO 'boards' ('name', 'color', 'date') VALUES ('Test_board', '#f18aff', 'April 27, 2020');
 INSERT INTO 'pins' ('board_id', 'image_id', 'name', 'link', 'description', 'date') VALUES (1, 1, 'Test_pin', 'https://www.pcmag.com/news/how-to-create-a-website','This is a test', 'April 22, 2020');
 INSERT INTO 'pins' ('board_id', 'image_id', 'name', 'link', 'description', 'date') VALUES (1, 1, 'Test_pin', 'https://www.pcmag.com/news/how-to-create-a-website','This is a test', 'April 23, 2020');
 INSERT INTO 'images' ('src', 'description') VALUES ('uploads/images/1.jpg', 'Test_img');

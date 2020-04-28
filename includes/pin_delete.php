@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["trash-confirmation"]))
   exec_sql_query($db, $sql_pin_delete, array(':id'=>$pin_id));
   exec_sql_query($db, $sql_tag_delete, array(':id'=>$pin_id));
 
-  $header_location = "Location: pins.php?board_id=" . $board_id;
+  $header_location = "Location: pins.php?" . http_build_query(array("board_id"=>$board_id));
   header($header_location);
 }
 
