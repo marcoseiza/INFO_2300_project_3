@@ -15,7 +15,7 @@ $boards = exec_sql_query($db, $board_sql)->fetchAll();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/boards.css">
-  <title>Document</title>
+  <title>Boards</title>
 </head>
 <?php
 
@@ -89,14 +89,26 @@ function board($id, $name, $color, $date, $name_update_message, $update_id) { ?>
           </svg>
           <div class="delete_title">delete</div>
           <div class="trash-confirmation">
-            <label class="trash-checkmark" for="trash-checkmark-button<?php echo $id?>">
+            <label class="trash-checkmark" for="trash-checkmark-button<?php echo $id?>" onmouseover="background(this)" onmouseout="background(this)">
               <input type="submit" name="trash-confirmation" id="trash-checkmark-button<?php echo $id?>" value="<?php echo $id?>">
               &#x2713;
             </label>
-            <label class="trash-cross">
+            <label class="trash-cross" onmouseover="background(this)" onmouseout="background(this)">
               &#10006;
             </label>
           </div>
+          <script>
+            function background(el) {
+              let form = el.parentElement.parentElement,
+                  formBackgroundColor = getComputedStyle(form).backgroundColor
+
+              if (formBackgroundColor == 'rgb(227, 227, 227)') {
+                form.style.backgroundColor = getComputedStyle(el).color.slice(0, -1) + ', 0.1)'
+              } else {
+                form.style.backgroundColor = ''
+              }
+            }
+          </script>
         </form>
       </div>
     </div>

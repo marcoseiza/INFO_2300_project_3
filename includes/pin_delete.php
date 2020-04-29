@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["trash-confirmation"]))
 
   $sql_get_img_id = "SELECT image_id FROM pins WHERE id = :id";
   $sql_get_img_src = "SELECT src FROM images WHERE id = :img_id";
+  $sql_img_delete = "DELETE FROM images WHERE id = :img_id";
   $sql_pin_delete = "DELETE FROM pins WHERE id = :id";
   $sql_tag_delete = "DELETE FROM tags WHERE pin_id = :id";
 
@@ -14,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["trash-confirmation"]))
   $img_src = (exec_sql_query($db, $sql_get_img_src, array(':img_id'=>$img_id))->fetchAll())[0]["src"];
   unlink($img_src);
 
+  exec_sql_query($db, $sql_img_delete, array(':img_id'=>$img_id));
   exec_sql_query($db, $sql_pin_delete, array(':id'=>$pin_id));
   exec_sql_query($db, $sql_tag_delete, array(':id'=>$pin_id));
 

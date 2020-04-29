@@ -452,30 +452,28 @@ main {
             display: none;
             position: absolute;
             z-index: 999;
-            left: 0;
+            left: 0; top: 0;
             grid-template-columns: auto auto;
-            gap: 17px;
             place-content: center;
-            margin-top: 5.5px;
-            padding-left: 16px;
-            width: 57px;
-            height: 30px;
             border-radius: 10px;
+            margin-left: 4px;
 
-            .trash-checkmark {
+            label {
+              padding: 14px 12px;
               font-size: 18px;
-              color: rgb(18, 151, 18);
               user-select: none;
               cursor: pointer;
+            }
+
+            .trash-checkmark {
+              color: rgb(18, 151, 18);
               input {
                 display: none;
               }
             }
+
             .trash-cross {
-              font-size: 18px;
               color: rgb(218, 3, 3);
-              user-select: none;
-              cursor: pointer;
             }
           }
         }

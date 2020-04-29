@@ -185,6 +185,45 @@ stars {
 
 ```
 
+## New Plan
+
+- removed users and stars
+- added colors and dates
+
+```
+
+boards {
+  id: INT PK NN U AI
+  name: TXT NN
+  color: TXT NN
+  date: TXT NN
+}
+
+pin {
+  id: INT PK NN U AI
+  board_id INT NN
+  image_id INT NN
+  name: TXT NN
+  link: TXT NN
+  date: TXT NN
+  description: TXT NN
+}
+
+image {
+  id: INT PK NN U AI
+  src: TXT NN
+  description: TXT NN
+}
+
+tags {
+  id: INT PK NN U AI
+  pin_id: INT NN
+  name: TXT NN
+  color: TXT NN
+}
+
+```
+
 ## Database Query Plan (Milestone 1)
 > Plan your database queries. You may use natural language, pseudocode, or SQL.
 > Using your request plan above, plan all of the queries you need.
@@ -250,12 +289,64 @@ INSERT INTO tags (name, pin_id) VALUES (':name', ':pin_id')
 ```
 
 
+## New Plan
+
+### Board
+
+SELECT * FROM boards
+SELECT * FROM boards WHERE id = :id
+
+INSERT INTO boards Values (:name, :color, :date)
+UPDATE boards SET name color date WHERE id = :id
+DELETE FROM board WHERE id = :id
+
+### pin
+
+SELECT * FROM pins
+SELECT * FROM pins WHERE id = :id
+//for all pins
+SELECT pins.id, pins.name, pins.link, pins.date, images.src, images.description FROM pins INNER JOIN images ON pins.image_id = images.id WHERE pins.board_id = :board_id
+//for specific tag
+SELECT tags.name, tags.color, pins.name, pins.image_id, pins.link, pins.date, images.src, images.description FROM tags INNER JOIN pins ON tags.pin_id = pins.id INNER JOIN images ON pins.image_id = images.id WHERE pins.board_id = :board_id AND tags.name like :name
+
+INSERT INTO pins Values (:board_id :img_id :name, :link, :date :description)
+UPDATE pins SET img_id name link date description date WHERE id = :id
+DELETE FROM pins WHERE id = :id
+
+### tags
+
+SELECT tags.name, tags.color FROM tags WHERE tags.pin_id = :id
+
+INSERT INTO tags Values (:name :color)
+UPDATE tags SET name color WHERE id = :id
+DELETE FROM tags WHERE id = :id
+
+### Image
+
+INSERT INTO images Values (:src, :desc)
+UPDATE images SET src desc WHERE id = :id
+DELETE FROM images WHERE id = :id
+
+
+
+
 ## Code Planning (Milestone 1)
 > Plan what top level PHP pages you'll need.
 
 - init.php
 - search.php
 - insert.php
+
+## New Plan
+
+- add board
+- update board
+- delete board
+- add pin
+- update pin
+- delete pin
+- init.php
+
 
 > Plan what partials you'll need.
 
@@ -272,6 +363,41 @@ function for expanded pin (pin card info) {
   html code with pin info
 }
 ```
+
+## New Plan
+
+- remove the expanded pin function, don't need it
+- expanded pin, or pin_close.php will be its own html page
+
+function board card (board card info) {
+  stuff I need:
+  - preview of pin board
+  - folder color
+  - board name
+  - date created
+  - options menu for deleting and editing
+}
+
+function pin card (pin card info) {
+  stuff I need:
+  - scrrenshot of website (my image)
+  - pin name
+  - list of tags
+  - link to the website
+  - date created
+  - options menu for deleting and editing
+}
+
+pin_close.php (expanded pin)
+- stuff I need:
+  - scrrenshot of website (my image)
+  - pin name
+  - list of tags
+  - link to the website
+  - date created
+  - NEW!!! Description of pin
+  - options menu for deleting and editing
+
 
 > Plan any PHP code you'll need.
 
@@ -302,6 +428,101 @@ if (insert tag) {
 
 ```
 
+## New plan
+
+init.php
+```php
+  //just open the db
+  //thats it
+  $db = open_or_init_sqlite_db('secure/gallery.sqlite', 'secure/init.sql');
+```
+
+board_add.php
+```php
+
+// validate name
+
+if valid {
+  // insert into boards :info
+}
+```
+
+board_update.php
+```php
+
+// validate name
+
+if valid {
+  // update board :values
+}
+```
+
+board_delete.php
+```php
+
+// delete board where id = :id
+
+```
+
+pin_add.php
+```php
+
+// validate input
+
+// get tags
+explode('#', tags)
+foreach (tag) {
+  tag = explode(' ', tag)
+  // tag[0] = name ; tag[1] = color
+  tag[0] = filter_var(tag[0], filter_string)
+}
+
+// validate name
+// validate link
+// validate description
+// validate that screenshot is actually an image
+
+if (valid) {
+  // filter all inputs
+  // insert them into db
+  "INSERT INTO images VALUES //all the image stuff"
+  "SELECT id FROM images ORDER BY id DESC LIMIT 1" // the last one
+  move_uploaded_file(img, to 'id.extention')
+  "INSERT INTO pin VALUES //and all the stuff including the latest image id"
+  foreach (tag) {
+    "INSERT INTO tag"
+  }
+}
+
+```
+
+pin_update.php
+
+```php
+
+// validate input like pin_add
+
+if (valid) {
+  // update all info
+  // sql for update
+
+
+  // unlink image
+  // upload new image
+}
+```
+
+pin_delete.php
+
+```php
+
+// select image_id from pin
+// sql DELETE pin
+// sql DELETE tags where pin_id = :pin_id
+// unlink image
+
+```
+
 
 # Complete & Polished Website (Final Submission)
 
@@ -309,38 +530,88 @@ if (insert tag) {
 > Write step-by-step instructions for the graders.
 > For each set of instructions, assume the grader is starting from index.php.
 
-Viewing all images in your gallery:
-1.
-2.
+Viewing all pins in a board (Viewing all galleries):
+1. Get started by pressing 'Make a Board' on the main page
+2. You will see a grid layout of 'Boards'
+3. Click on a board to see the 'pins' in the board
+Note: The boards are my galleries
+Note2: There are some secrets in the main page
 
-View all images for a tag:
-1.
-2.
+Make a new board (Add a gallery):
+1. Click on the plus icon in the boards page
+2. Put in a name and hit 'add board'
+Note: There are some secrets in the board form
 
-View a single image and all the tags for that image:
-1.
-2.
+Edit a board (Edit a gallery):
+1. Go to desired board card and hit the three dots
+2. Click the 'edit' option
+3. Input desired information and click done
+Note: There are some secrets in the board form
 
-How to upload a new image:
-1.
-2.
+Delete a board (Delete gallery):
+1. Go to desired board card
+2. Click on the three dots
+3. Click the 'delete' option
+4. Click the Check icon
 
-How to delete an image:
-1.
-2.
+View pins in your board (Viewing all images in your gallery):
+1. Go to desired board card
+2. Click on the image or the name of the board
+
+View all pins for a tag (View all images for a tag):
+1. Go to desired pin by
+    - hovering over one of the tags at the top of the page
+    - hovering over one of the tags in your desired pin
+2. Click on the tag
+
+View a single pin and all the tags for that pin(View a single image and all the tags for that image):
+1. Go to desired pin
+2. Click on the name or the image
+3. You will be directed to a page with your pin's information
+
+How to upload a new pin (How to upload a new image):
+1. Go to the pins page
+2. Click on the plus icon
+3. Fill in the desired information
+    - The image, the name, and the url are required
+    - Tags must start with a '#' and you must press 'space' or 'enter' to register the pin
+4. Click 'add pin' when you're done
+
+How to delete a pin(How to delete an image):
+1. Go to desired pin
+2. Click on the three dots
+3. Click on the 'delete' option
+4. Click on the checkmark
 
 How to view all tags at once:
-1.
-2.
+1. Load your desired board
+2. You will see a list of tags at the top of the page
 
-How to add a tag to an existing image:
-1.
-2.
+How to edit a pin (How to add a tag to an existing image):
+1. Go to desired pin
+2. Click on the three dots
+3. Click on the 'edit' option
+4. Fill in desired information
+Note: For inserting tags
+- The tag must start with a hashtag
+- The user must click 'space' or 'enter' to register the tag
 
-How to remove a tag from an existing image:
-1.
-2.
+Continuation on the tag input (How to remove a tag from an existing image):
+- For the add pin form or for the edit pin form
+- To delete
+  - press 'delete'
+  - tag will be highlighted by a red border
+  - press 'delete' one more time
+  - this will delete the tag
 
 
 ## Reflection (Final Submission)
 > Take this time to reflect on what you learned during this assignment. How have you improved since starting this class?
+
+I believe I learned a lot from this project and through my class experience. I started the class with almost no knowledge of html, php, css, or javascript, and I ended it with a very large proficiency in all of them. I also never expected to do such large scale database projects like this one. Last project, I started doing two table handleing and then I realised that I could only use 1 table. Ooops! So I already had some experience with multiple tables.
+This project I had some trouble handleing how to return to the desired board page after a form submission. I was using url parameters to GET the board id, so when I POSTed I lost all the variables. I found I could change the header of the page after all my php form validation and sql stuff. GREAT! This let me go to the desired page after form submission. I hid the necessary url parameters in the form's submit value.
+I really like how this project turned out visually also, it's clean yet friendly. I personally really like the options menu I have.
+I think I did a really good job in this project. I am very proud of myself.
+
+ALSO:
+There are some secrets in the website :)

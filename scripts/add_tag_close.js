@@ -1,6 +1,9 @@
 let input = document.getElementById('update_form_pin_tags'),
-    hidden_input = document.getElementById('hidden_update_form_pin_tags'),
-    list = document.getElementById('update_form_pin_tag_list'),
+    hidden_input = document.getElementById('hidden_update_form_pin_tags')
+
+hidden_input.value = hidden_input.defaultValue
+
+let list = document.getElementById('update_form_pin_tag_list'),
     tag = "",
     tag_writing = false,
     tag_numb = hidden_input.value.split('#').length - 1,
@@ -56,6 +59,7 @@ function deletePreviousTag () {
 }
 
 input.onkeydown = function () {
+  input.setCustomValidity('')
   var key = event.keyCode || event.charCode
   value = input.value
 
@@ -77,6 +81,7 @@ input.onkeydown = function () {
 }
 
 input.oninput = function () {
+  input.setCustomValidity('')
   last = input.value.slice(-1)
 
   if (last == "#") {
@@ -87,6 +92,13 @@ input.oninput = function () {
 
   if (tag_writing) {
     tag += last
+  }
+}
+
+input.onblur = function() {
+  input.placeholder = "add or delete pins"
+  if (tag.length > 1) {
+    input.setCustomValidity('Press Space or Enter to Validate Tag')
   }
 }
 

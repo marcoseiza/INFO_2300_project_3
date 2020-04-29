@@ -13,7 +13,7 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/pins.css">
-  <title>Document</title>
+  <title><?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($board_name)))?></title>
 </head>
 <body>
   <header>
@@ -27,17 +27,37 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
   </header>
 
   <main id="main">
-    <?php if(isset($_GET["tag_name"])) { ?>
-      <div class="tags">
-          <span>Active Tag:</span>
-          <a href="pins.php?<?php echo http_build_query(array("board_id"=>$board_id))?>">
-            <?php echo htmlspecialchars($_GET["tag_name"])?>
-            <svg viewbox="0 0 30 30">
-                <path d="M15 25 l0 -20 M5 15 l20 0"/>
-            </svg>
-          </a>
-      </div>
-    <?php }?>
+    <div class="tags">
+      <?php if(isset($_GET["tag_name"])) {
+        $get_pins = "SELECT tags.name, tags.color, pins.name, pins.image_id, pins.link, pins.date, images.src, images.description FROM tags INNER JOIN pins ON tags.pin_id = pins.id INNER JOIN images ON pins.image_id = images.id WHERE pins.board_id = :board_id AND tags.name like :name";
+        $pins = exec_sql_query($db, $get_pins, array(":board_id" => $board_id,":name" => $_GET["tag_name"]))->fetchAll();
+        ?>
+
+        <span>Active Tag:</span>
+        <a href="pins.php?<?php echo http_build_query(array("board_id"=>$board_id))?>">
+          <?php echo htmlspecialchars($_GET["tag_name"])?>
+          <svg viewbox="0 0 30 30">
+              <path d="M15 25 l0 -20 M5 15 l20 0"/>
+          </svg>
+        </a>
+
+      <?php } else {
+        $get_pins = "SELECT pins.id, pins.name, pins.link, pins.date, images.src, images.description FROM pins INNER JOIN images ON pins.image_id = images.id WHERE pins.board_id = :board_id";
+        $get_tags = "SELECT tags.name, tags.color FROM tags WHERE tags.pin_id = :id";
+        $pins = exec_sql_query($db, $get_pins, array(":board_id" => $board_id))->fetchAll();
+        ?>
+        <span class="alltags">Tags:</span>
+      <?php
+        foreach ($pins as $pin) {
+          $tags = exec_sql_query($db, $get_tags, array(":id" => $pin["id"]))->fetchAll();
+          foreach ($tags as $tag) { ?>
+            <a class="alltags" href="pins.php?<?php echo http_build_query(array("tag_name"=>$tag["name"], "board_id"=>$board_id))?>" style="background-color: <?php echo htmlspecialchars($tag["color"])?>;"><?php echo htmlspecialchars($tag["name"])?></a>
+          <?php
+            }
+          }
+        }
+      ?>
+    </div>
     <div class="pins_container">
       <input type="checkbox" name="add_pin" id="add_pin" <?php echo $_GET['checked']?>>
       <div class="pins_container__add">
@@ -183,14 +203,26 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
                   </svg>
                   <div class="delete_title">delete</div>
                   <div class="trash-confirmation">
-                    <label class="trash-checkmark" for="trash-checkmark-button<?php echo $id?>">
+                    <label class="trash-checkmark" for="trash-checkmark-button<?php echo $id?>" onmouseover="background(this)" onmouseout="background(this)">
                       <input type="submit" name="trash-confirmation" id="trash-checkmark-button<?php echo $id?>" value="<?php echo $id .','. $board_id ?>">
                       &#x2713;
                     </label>
-                    <label class="trash-cross">
+                    <label class="trash-cross" onmouseover="background(this)" onmouseout="background(this)">
                       &#10006;
                     </label>
                   </div>
+                  <script>
+                    function background(el) {
+                      let form = el.parentElement.parentElement,
+                          formBackgroundColor = getComputedStyle(form).backgroundColor
+
+                      if (formBackgroundColor == 'rgb(227, 227, 227)') {
+                        form.style.backgroundColor = getComputedStyle(el).color.slice(0, -1) + ', 0.1)'
+                      } else {
+                        form.style.backgroundColor = ''
+                      }
+                    }
+                  </script>
                 </form>
               </div>
               <div class="pin__content__prevw__tags">
@@ -218,17 +250,11 @@ $board_name = (exec_sql_query($db, "SELECT name FROM boards WHERE id = :id", arr
       <?php }
 
         if (isset($_GET["tag_name"])) {
-          $get_pins = "SELECT tags.name, tags.color, pins.name, pins.image_id, pins.link, pins.date, images.src, images.description FROM tags INNER JOIN pins ON tags.pin_id = pins.id INNER JOIN images ON pins.image_id = images.id WHERE pins.board_id = :board_id AND tags.name like :name";
-          $pins = exec_sql_query($db, $get_pins, array(":board_id" => $board_id,":name" => $_GET["tag_name"]))->fetchAll();
-
           foreach ($pins as $pin) {
             pin($board_id, $pin["id"], $pin["name"], $pin["link"], $pin["date"], $pin["src"], $pin["description"], array(array("name"=>$pin[0], "color"=>$pin["color"])));
           }
 
         } else {
-          $get_pins = "SELECT pins.id, pins.name, pins.link, pins.date, images.src, images.description FROM pins INNER JOIN images ON pins.image_id = images.id WHERE pins.board_id = :board_id";
-          $get_tags = "SELECT tags.name, tags.color FROM tags WHERE tags.pin_id = :id";
-          $pins = exec_sql_query($db, $get_pins, array(":board_id" => $board_id))->fetchAll();
           foreach ($pins as $pin) {
             $tags = exec_sql_query($db, $get_tags, array(":id" => $pin["id"]))->fetchAll();
             pin($board_id, $pin["id"], $pin["name"], $pin["link"], $pin["date"], $pin["src"], $pin["description"], $tags);

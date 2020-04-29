@@ -3,7 +3,6 @@ let input = document.getElementById('options'),
     trash = document.querySelector('.options_menu__trash')
 
 window.addEventListener('click', function(e){
-  console.log(e.target)
   if (document.querySelector('.prevw__options').contains(e.target) || options_menu.contains(e.target)){
     input.checked = true
   } else{

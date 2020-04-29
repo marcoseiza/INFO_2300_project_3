@@ -56,6 +56,7 @@ function deletePreviousTag () {
 }
 
 input.onkeydown = function () {
+  input.setCustomValidity('')
   var key = event.keyCode || event.charCode
   value = input.value
 
@@ -77,7 +78,7 @@ input.onkeydown = function () {
 }
 
 input.oninput = function () {
-  // console.log(input.value)
+  input.setCustomValidity('')
   last = input.value.slice(-1)
 
   if (last == "#") {
@@ -91,4 +92,9 @@ input.oninput = function () {
   }
 }
 
-// background.innerHTML = "<span>" + safe_value + "</span>"
+input.onblur = function() {
+  input.placeholder = "#tag1 #tag2 #tag3"
+  if (tag.length > 1) {
+    input.setCustomValidity('Press Space or Enter to Validate Tag')
+  }
+}

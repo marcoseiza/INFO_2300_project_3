@@ -5,7 +5,7 @@ body {
   height: 100vh; width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   font-family: Montserrat;
   background-color: color(primary);
 }
@@ -51,8 +51,7 @@ header {
 }
 
 .back {
-  position: absolute;
-  top: 80px; left: 5vw;
+  margin: 90px 0 50px 70px;
   a {
     display: flex;
     align-items: center;
@@ -86,15 +85,15 @@ header {
 main {
   display: grid;
   grid-template-columns: auto 1fr;
-  padding: 5vw;
+  padding: 0 5vw;
 }
 
 .image {
   height: 36.6vw;
   width: 65vw;
+  overflow: scroll;
   img {
     width: 100%;
-    height: 100%;
     object-fit: cover;
   }
 }
@@ -217,30 +216,28 @@ main {
         display: none;
         position: absolute;
         z-index: 999;
-        left: 0;
+        left: 0; top: 0;
         grid-template-columns: auto auto;
-        gap: 17px;
         place-content: center;
-        margin-top: 5.5px;
-        padding-left: 16px;
-        width: 57px;
-        height: 30px;
         border-radius: 10px;
+        margin-left: 4px;
+
+        label {
+          padding: 14px 12px;
+          font-size: 18px;
+          user-select: none;
+          cursor: pointer;
+        }
 
         .trash-checkmark {
-            font-size: 18px;
-            color: rgb(18, 151, 18);
-            user-select: none;
-            cursor: pointer;
-            input {
-              display: none;
-            }
+          color: rgb(18, 151, 18);
+          input {
+            display: none;
+          }
         }
+
         .trash-cross {
-            font-size: 18px;
-            color: rgb(218, 3, 3);
-            user-select: none;
-            cursor: pointer;
+          color: rgb(218, 3, 3);
         }
       }
     }
@@ -274,6 +271,7 @@ main {
       height: 18px;
       padding: 0.1em 0 0.1em 0.3em;
       display: grid;
+      text-decoration: none;
       grid-template-columns: auto 30px;
 
       div {

@@ -16,7 +16,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title><?php echo str_replace("&amp;","&",str_replace('&#39;',"'",htmlspecialchars($pin["name"])))?></title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/pin_close.css">
 </head>
@@ -104,14 +104,26 @@
           </svg>
           <div class="delete_title">delete</div>
           <div class="trash-confirmation">
-            <label class="trash-checkmark" for="trash-checkmark-button">
+            <label class="trash-checkmark" for="trash-checkmark-button" onmouseover="background(this)" onmouseout="background(this)">
               <input type="submit" name="trash-confirmation" id="trash-checkmark-button" value="<?php echo $_GET["id"] .','. $board_id?>">
               &#x2713;
             </label>
-            <label class="trash-cross">
+            <label class="trash-cross" onmouseover="background(this)" onmouseout="background(this)">
               &#10006;
             </label>
           </div>
+          <script>
+            function background(el) {
+              let form = el.parentElement.parentElement,
+                  formBackgroundColor = getComputedStyle(form).backgroundColor
+
+              if (formBackgroundColor == 'rgb(227, 227, 227)') {
+                form.style.backgroundColor = getComputedStyle(el).color.slice(0, -1) + ', 0.1)'
+              } else {
+                form.style.backgroundColor = ''
+              }
+            }
+          </script>
         </form>
         <script src="scripts/trash_close.js"></script>
       </div>

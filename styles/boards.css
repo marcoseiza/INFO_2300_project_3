@@ -586,25 +586,26 @@ main .board__info__options_menu__trash .trash-confirmation {
   position: absolute;
   z-index: 999;
   left: 0;
+  top: 0;
   -ms-grid-columns: auto auto;
       grid-template-columns: auto auto;
-  gap: 17px;
   place-content: center;
-  margin-top: 5.5px;
-  padding-left: 16px;
-  width: 57px;
-  height: 30px;
   border-radius: 10px;
+  margin-left: 4px;
 }
 
-main .board__info__options_menu__trash .trash-confirmation .trash-checkmark {
+main .board__info__options_menu__trash .trash-confirmation label {
+  padding: 14px 12px;
   font-size: 18px;
-  color: #129712;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   cursor: pointer;
+}
+
+main .board__info__options_menu__trash .trash-confirmation .trash-checkmark {
+  color: #129712;
 }
 
 main .board__info__options_menu__trash .trash-confirmation .trash-checkmark input {
@@ -612,13 +613,7 @@ main .board__info__options_menu__trash .trash-confirmation .trash-checkmark inpu
 }
 
 main .board__info__options_menu__trash .trash-confirmation .trash-cross {
-  font-size: 18px;
   color: #da0303;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  cursor: pointer;
 }
 
 main .board__edit {
