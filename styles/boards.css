@@ -380,9 +380,10 @@ main .board__iframe_container iframe {
   left: -5px;
   width: 1338px;
   height: 860px;
-  scale: 0.275;
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  -webkit-transform: scale(0.275);
+          transform: scale(0.275);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
 }
 
 main .board > input {

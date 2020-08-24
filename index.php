@@ -20,7 +20,6 @@
       <span>Better Inspiration,</span>
       <span>Better Design.</span>
     </span>
-    <p class="main__subtitle">Weboard helps you organize your web inspiration for all of your projects.</p>
   </div>
   <a href="boards.php">MAKE A BOARD</a>
   <div class="graphic">

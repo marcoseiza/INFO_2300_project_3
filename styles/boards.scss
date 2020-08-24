@@ -292,8 +292,8 @@ main {
         top: -15px; left: -5px;
         width: 1338px;
         height: 860px;
-        scale: 0.275;
-        transform-origin: 0 0;
+        transform: scale(0.275);
+        transform-origin: top left;
       }
     }
 
