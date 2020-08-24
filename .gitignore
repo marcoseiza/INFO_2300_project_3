@@ -13,6 +13,12 @@ composer.phar
 *.db
 *.checksum
 
+# scss and css map
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
+
 # OS generated files #
 ######################
 .DS_Store
