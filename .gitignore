@@ -14,10 +14,9 @@ composer.phar
 *.checksum
 
 # scss and css map
-.sass-cache/
 *.css.map
-*.sass.map
-*.scss.map
+*.scss
+!_*.scss
 
 # OS generated files #
 ######################
